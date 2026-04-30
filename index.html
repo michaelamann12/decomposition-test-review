@@ -92,8 +92,8 @@
         <ul>
           <li>The refactor produced equivalent or better activity content than the monolith. No regressions.</li>
           <li>Two small quality wins: header naming now matches the canonical spec; the monolith bug that leaked the question-type tag into Q1 ("Literal Comprehension What is the narrator...") is fixed.</li>
-          <li>One real bug to fix before promotion: when the pipeline uses cross-curriculum exemplars (which it must for new curricula like Bluebonnet, Odell, AAL, Guidebooks), the <code>pattern_synthesis.md</code> "Cross-Curriculum Constraints" section is left blank.</li>
-          <li>One small instrumentation regression: the <code>_summary.md</code> chain-trace digest didn't fire on this run.</li>
+          <li>The cross-curriculum exemplar path works correctly — <code>pattern_synthesis.md</code> produced lesson-specific Cross-Curriculum Constraints (named HMH as source, listed 3 specific avoid patterns with reasons, captured exemplar disagreements with rationale).</li>
+          <li>One small instrumentation regression on this run: the <code>_summary.md</code> chain-trace digest wasn't written and the Step 6 report came out in a non-canonical shape. Closed in Phase 3.5 — both producer-side spec tightening and validator coverage are in place for the next run.</li>
         </ul>
       </div>
     </div>
