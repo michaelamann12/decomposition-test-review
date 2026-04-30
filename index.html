@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bluebonnet G5 L2 — Decomposition Test Review</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="title-block">
+      <div class="eyebrow">Decomposition Test — Phase 3 Review</div>
+      <h1 id="lesson-title">Bluebonnet G5 — Lesson 2</h1>
+      <div class="meta-line" id="meta-line"></div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="comparison">Question Comparison</button>
+      <button class="tab" data-tab="artifacts">Run Artifacts</button>
+      <button class="tab" data-tab="about">About</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- View: Question Comparison -->
+  <section class="view active" id="view-comparison">
+    <div class="view-header">
+      <h2>Four-version question sequence comparison</h2>
+      <p class="view-desc">
+        Compare what the module plan asked for, what the original Apr 20 monolith produced, what the contractor submitted to review on Apr 21, and what the new decomposed pipeline produced on Apr 30.
+      </p>
+      <div class="controls">
+        <label class="control">
+          <span>View mode:</span>
+          <select id="comparison-mode">
+            <option value="side-by-side">Side-by-side (4 columns)</option>
+            <option value="stacked">Stacked per question</option>
+          </select>
+        </label>
+        <label class="control">
+          <input type="checkbox" id="hide-empty" />
+          <span>Hide empty cells</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Module-plan headline panel -->
+    <details class="module-plan-panel" open>
+      <summary><strong>Module plan source data</strong> <span class="hint">(what the lesson is supposed to be)</span></summary>
+      <div id="module-plan-body" class="mp-body"></div>
+    </details>
+
+    <!-- Review summary panel (Column 3 context) -->
+    <details class="review-summary-panel">
+      <summary><strong>Contractor's review summary</strong> <span class="hint">(why Column 3 differs from Column 2 — the Apr 21 contractor's notes)</span></summary>
+      <div id="review-summary-body" class="markdown-body"></div>
+    </details>
+
+    <!-- The actual comparison -->
+    <div id="comparison-container"></div>
+  </section>
+
+  <!-- View: Run Artifacts -->
+  <section class="view" id="view-artifacts">
+    <div class="view-header">
+      <h2>Run artifacts — Apr 30 decomposed pipeline</h2>
+      <p class="view-desc">
+        Every file produced by the new pipeline for this lesson, in chain order. Click any header to expand.
+      </p>
+    </div>
+    <div id="artifacts-container"></div>
+  </section>
+
+  <!-- View: About -->
+  <section class="view" id="view-about">
+    <div class="view-header">
+      <h2>About this dashboard</h2>
+      <div class="about-body">
+        <p>This dashboard supports the 1:1 sync to review the first clean Axis A parity test of the decomposed authoring pipeline. The companion documents are:</p>
+        <ul>
+          <li><strong>Decomposition Eval Plan</strong> — the framework, three axes, and 2026-04-30 status update at the top</li>
+          <li><strong>Testing Execution Log</strong> — phase-by-phase record of every test, including the full Phase 3 entry</li>
+        </ul>
+        <p>Both live in the personal Google Drive product folder.</p>
+        <h3>How to use</h3>
+        <ul>
+          <li><strong>Question Comparison tab</strong> — best place to start. Compare what the module plan asked for vs. what each pipeline version produced, side-by-side or stacked.</li>
+          <li><strong>Run Artifacts tab</strong> — every intermediate file the new pipeline produced, in chain order. Useful for technical drill-downs.</li>
+        </ul>
+        <h3>Key findings (from the Phase 3 log entry)</h3>
+        <ul>
+          <li>The refactor produced equivalent or better activity content than the monolith. No regressions.</li>
+          <li>Two small quality wins: header naming now matches the canonical spec; the monolith bug that leaked the question-type tag into Q1 ("Literal Comprehension What is the narrator...") is fixed.</li>
+          <li>One real bug to fix before promotion: when the pipeline uses cross-curriculum exemplars (which it must for new curricula like Bluebonnet, Odell, AAL, Guidebooks), the <code>pattern_synthesis.md</code> "Cross-Curriculum Constraints" section is left blank.</li>
+          <li>One small instrumentation regression: the <code>_summary.md</code> chain-trace digest didn't fire on this run.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Generated <span id="generated-at"></span> from <code>project-clone/draft_outputs/2026-04-30_TX_BBO_XX_G5_1.0_2_v1/</code></span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
