@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bluebonnet G5 L2 — Decomposition Test Review</title>
+<title>Decomposition Test Review</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
+    <nav class="lesson-tabs" id="lesson-tabs"></nav>
     <div class="title-block">
-      <div class="eyebrow">Decomposition Test — Phase 3 Review</div>
-      <h1 id="lesson-title">Bluebonnet G5 — Lesson 2</h1>
+      <div class="eyebrow" id="phase-label">Decomposition Test Review</div>
+      <h1 id="lesson-title">—</h1>
       <div class="meta-line" id="meta-line"></div>
     </div>
     <nav class="tabs">
@@ -76,32 +77,13 @@
   <section class="view" id="view-about">
     <div class="view-header">
       <h2>About this dashboard</h2>
-      <div class="about-body">
-        <p>This dashboard supports the 1:1 sync to review the first clean Axis A parity test of the decomposed authoring pipeline. The companion documents are:</p>
-        <ul>
-          <li><strong>Decomposition Eval Plan</strong> — the framework, three axes, and 2026-04-30 status update at the top</li>
-          <li><strong>Testing Execution Log</strong> — phase-by-phase record of every test, including the full Phase 3 entry</li>
-        </ul>
-        <p>Both live in the personal Google Drive product folder.</p>
-        <h3>How to use</h3>
-        <ul>
-          <li><strong>Question Comparison tab</strong> — best place to start. Compare what the module plan asked for vs. what each pipeline version produced, side-by-side or stacked.</li>
-          <li><strong>Run Artifacts tab</strong> — every intermediate file the new pipeline produced, in chain order. Useful for technical drill-downs.</li>
-        </ul>
-        <h3>Key findings (from the Phase 3 log entry)</h3>
-        <ul>
-          <li>The refactor produced equivalent or better activity content than the monolith. No regressions.</li>
-          <li>Two small quality wins: header naming now matches the canonical spec; the monolith bug that leaked the question-type tag into Q1 ("Literal Comprehension What is the narrator...") is fixed.</li>
-          <li>The cross-curriculum exemplar path works correctly — <code>pattern_synthesis.md</code> produced lesson-specific Cross-Curriculum Constraints (named HMH as source, listed 3 specific avoid patterns with reasons, captured exemplar disagreements with rationale).</li>
-          <li>One small instrumentation regression on this run: the <code>_summary.md</code> chain-trace digest wasn't written and the Step 6 report came out in a non-canonical shape. Closed in Phase 3.5 — both producer-side spec tightening and validator coverage are in place for the next run.</li>
-        </ul>
-      </div>
+      <div class="about-body" id="about-body"></div>
     </div>
   </section>
 </main>
 
 <footer class="footer">
-  <span>Generated <span id="generated-at"></span> from <code>project-clone/draft_outputs/2026-04-30_TX_BBO_XX_G5_1.0_2_v1/</code></span>
+  <span>Generated <span id="generated-at"></span> from <code id="generated-source">—</code></span>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
