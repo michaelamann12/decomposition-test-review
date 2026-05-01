@@ -373,6 +373,47 @@
     aboutBody.innerHTML = html;
   }
 
+  // ---------- Edit-Draft Checks reference ----------
+  function renderChecks() {
+    const C = window.CHECKS;
+    if (!C) return;
+    document.getElementById("checks-intro").innerHTML = C.intro;
+    const container = document.getElementById("checks-container");
+    container.innerHTML = "";
+    C.groups.forEach((g) => {
+      const block = document.createElement("details");
+      block.className = "checks-group";
+      const summary = document.createElement("summary");
+      summary.innerHTML = `<strong>${escapeHTML(g.title)}</strong> <span class="check-count">(${g.checks.length} ${g.checks.length === 1 ? "check" : "checks"})</span>`;
+      block.appendChild(summary);
+      const body = document.createElement("div");
+      body.className = "checks-group-body";
+      let html = `<p class="checks-blurb">${g.blurb}</p>`;
+      g.checks.forEach((c) => {
+        html += `<div class="check-card${c.severity === "HIGH" ? " sev-high" : ""}">`;
+        html += `<div class="check-head"><span class="check-id">${escapeHTML(c.id)}</span><span class="check-title">${escapeHTML(c.title)}</span>`;
+        if (c.severity) html += `<span class="check-sev sev-${c.severity.toLowerCase()}">${escapeHTML(c.severity)}</span>`;
+        html += `</div>`;
+        html += `<div class="check-desc">${c.desc}</div>`;
+        if (c.flags && c.flags.length) {
+          html += `<div class="check-row"><span class="check-row-label">Flags:</span><ul class="check-flags">`;
+          c.flags.forEach((f) => { html += `<li><code>${escapeHTML(f)}</code></li>`; });
+          html += `</ul></div>`;
+        }
+        if (c.autofix) {
+          html += `<div class="check-row"><span class="check-row-label">Auto-fix:</span><span class="check-autofix">${escapeHTML(c.autofix)}</span></div>`;
+        }
+        if (c.ref) {
+          html += `<div class="check-row"><span class="check-row-label">Reference:</span><code>${escapeHTML(c.ref)}</code></div>`;
+        }
+        html += `</div>`;
+      });
+      body.innerHTML = html;
+      block.appendChild(body);
+      container.appendChild(block);
+    });
+  }
+
   // ---------- Render dispatch ----------
   function renderLesson() {
     renderHeader();
@@ -392,4 +433,5 @@
   }
   renderLessonTabs();
   renderLesson();
+  renderChecks();
 })();
