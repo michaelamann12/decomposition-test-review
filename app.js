@@ -170,23 +170,47 @@
     return html;
   }
 
+  function isMC(q) {
+    return (q.type || "").toLowerCase().includes("mpchoice")
+      || (q.type || "").toLowerCase().includes("multiple choice")
+      || (q.options && q.options.length > 0);
+  }
+
+  function renderQuestionBody(q) {
+    let html = "";
+    html += `<div class="qstem">${escapeHTML(q.question || "")}</div>`;
+    if (isMC(q) && q.options && q.options.length) {
+      html += `<ul class="qopts">`;
+      q.options.forEach((o) => {
+        const isCorrect = o.letter === q.correct_letter;
+        html += `<li class="qopt${isCorrect ? " qopt-correct" : ""}"><span class="qopt-letter">${escapeHTML(o.letter)}</span><span class="qopt-text">${escapeHTML(o.text)}</span>${isCorrect ? `<span class="qopt-mark">✓</span>` : ""}</li>`;
+      });
+      html += `</ul>`;
+    }
+    if (q.criteria) {
+      html += `<span class="qcrit-label">Criteria</span><div class="qcrit">${escapeHTML(q.criteria)}</div>`;
+    }
+    if (q.correct_rationale) {
+      html += `<span class="qcrit-label">Correct answer rationale</span><div class="qcrit">${escapeHTML(q.correct_rationale)}</div>`;
+    }
+    if (q.distractor_rationales && Object.keys(q.distractor_rationales).length) {
+      html += `<details class="qdistractors"><summary>Distractor rationale (${Object.keys(q.distractor_rationales).length})</summary><ul class="qdr-list">`;
+      ["A", "B", "C", "D"].forEach((L) => {
+        if (q.distractor_rationales[L]) {
+          html += `<li><span class="qdr-letter">${L}</span> ${escapeHTML(q.distractor_rationales[L])}</li>`;
+        }
+      });
+      html += `</ul></details>`;
+    }
+    return html;
+  }
+
   function cellHtml(q, vKey) {
     if (!q) return `<div class="qcell empty col-${vKey}">—</div>`;
-    if (vKey === "v1") {
-      return `<div class="qcell col-${vKey}">
-        <div class="qtitle">${escapeHTML(q.title || "")}</div>
-        ${q.type ? `<div class="qtype-badge">${escapeHTML(q.type)}</div>` : ""}
-        <div class="qstem">${escapeHTML(q.question || "")}</div>
-        ${q.criteria ? `<span class="qcrit-label">Criteria</span><div class="qcrit">${escapeHTML(q.criteria)}</div>` : ""}
-      </div>`;
-    }
     return `<div class="qcell col-${vKey}">
       <div class="qtitle">${escapeHTML(q.title || "")}</div>
       ${q.type ? `<div class="qtype-badge">${escapeHTML(q.type)}</div>` : ""}
-      <div class="qstem">${escapeHTML(q.question || "")}</div>
-      ${q.criteria ? `<span class="qcrit-label">Criteria</span><div class="qcrit">${escapeHTML(q.criteria)}</div>` : ""}
-      ${q.explanation ? `<span class="qcrit-label">Explanation</span><div class="qcrit">${escapeHTML(q.explanation)}</div>` : ""}
-      ${q.options_correct ? `<span class="qcrit-label">Correct answer</span><div class="qcrit">${escapeHTML(q.options_correct)}</div>` : ""}
+      ${renderQuestionBody(q)}
     </div>`;
   }
 
@@ -214,10 +238,7 @@
     let content = "";
     if (q.title) content += `<div class="qtitle">${escapeHTML(q.title)}</div>`;
     if (q.type) content += `<div class="qtype-badge">${escapeHTML(q.type)}</div>`;
-    if (q.question) content += `<div class="qstem">${escapeHTML(q.question)}</div>`;
-    if (q.criteria) content += `<span class="qcrit-label">Criteria</span><div class="qcrit">${escapeHTML(q.criteria)}</div>`;
-    if (q.explanation) content += `<span class="qcrit-label">Explanation</span><div class="qcrit">${escapeHTML(q.explanation)}</div>`;
-    if (q.options_correct) content += `<span class="qcrit-label">Correct answer</span><div class="qcrit">${escapeHTML(q.options_correct)}</div>`;
+    content += renderQuestionBody(q);
     return `<div class="stacked-version ${vKey}">
       <div class="v-label">${escapeHTML(label)}<div class="vsub">${escapeHTML(subtitle)}</div></div>
       <div class="v-content">${content}</div>

@@ -68,51 +68,92 @@ window.DATA = {
               "title": "Question 1",
               "type": "lcq",
               "question": "Literal Comprehension What is the narrator hoping to find in Houston?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** lcq\n- **Question:** Literal Comprehension What is the narrator hoping to find in Houston?\n\n**Criteria:** Student identifies that the narrator is hoping to find the perfect land to grow Japanese seed rice.\n\n---"
+              "criteria": "Student identifies that the narrator is hoping to find the perfect land to grow Japanese seed rice.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 2",
               "type": "highlight as answer",
               "question": "Highlight one piece of evidence from paragraph 7 that shows an example of personification.",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** highlight as answer\n- **Question:** Highlight one piece of evidence from paragraph 7 that shows an example of personification.\n\n**Criteria:** Student highlights \"The sticky moisture in the air kissed my face\" or \"The sun was stretching its warmth in every direction\" (or both sentences) from paragraph 7.\n\n---"
+              "criteria": "Student highlights \"The sticky moisture in the air kissed my face\" or \"The sun was stretching its warmth in every direction\" (or both sentences) from paragraph 7.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 3",
               "type": "mpchoice",
               "question": "Look at paragraph 7. Which answer correctly identifies what is personified AND the human quality used to describe it?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** Look at paragraph 7. Which answer correctly identifies what is personified AND the human quality used to describe it?\n- A. The moisture in the air and the sun are personified; the human qualities are kissing and stretching.\n- B. The narrator is describing how the climate felt; \"kissed\" and \"stretching\" describe his personal sensations only.\n- C. The sticky moisture and the warm sun are described as welcoming; they give Houston the quality of being a perfect farming climate.\n- D. The narrator's excitement about farming is personified; the human quality is imagining the future.\n- Answer: A\n- **Distractor Rationale:**\n  - B: Students may confuse personification with sensory description — they see \"kissed my face\" and interpret it as the narrator's physical feeling rather than recognizing that the moisture is being given the human action of kissing.\n  - C: Students may focus on the climate detail that leads the narrator to think about farming and incorrectly identify \"welcoming\" as the human quality, missing that the personification is specifically the kissing and stretching actions.\n  - D: Students may shift attention to the narrator's emotions and thoughts, reversing the personification by applying human qualities to the narrator rather than to the nonhuman subjects.\n- **Correct Answer Rationale:** Option A is correct. In paragraph 7, the moisture in the air is personified because it is described as kissing the narrator's face — kissing is a human action. The sun is personified because it is described as stretching its warmth in every direction — stretching is a human action. Both sentences assign human behaviors to nonhuman things.\n\n---"
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The moisture in the air and the sun are personified; the human qualities are kissing and stretching."
+                },
+                {
+                  "letter": "B",
+                  "text": "The narrator is describing how the climate felt; \"kissed\" and \"stretching\" describe his personal sensations only."
+                },
+                {
+                  "letter": "C",
+                  "text": "The sticky moisture and the warm sun are described as welcoming; they give Houston the quality of being a perfect farming climate."
+                },
+                {
+                  "letter": "D",
+                  "text": "The narrator's excitement about farming is personified; the human quality is imagining the future."
+                }
+              ],
+              "correct_letter": "A",
+              "correct_rationale": "Option A is correct. In paragraph 7, the moisture in the air is personified because it is described as kissing the narrator's face — kissing is a human action. The sun is personified because it is described as stretching its warmth in every direction — stretching is a human action. Both sentences assign human behaviors to nonhuman things.",
+              "distractor_rationales": {
+                "B": "Students may confuse personification with sensory description — they see \"kissed my face\" and interpret it as the narrator's physical feeling rather than recognizing that the moisture is being given the human action of kissing.",
+                "C": "Students may focus on the climate detail that leads the narrator to think about farming and incorrectly identify \"welcoming\" as the human quality, missing that the personification is specifically the kissing and stretching actions.",
+                "D": "Students may shift attention to the narrator's emotions and thoughts, reversing the personification by applying human qualities to the narrator rather than to the nonhuman subjects."
+              }
             },
             {
               "title": "Question 4",
               "type": "tdq",
               "question": "Look at paragraph 5. What nonhuman thing is being personified in the phrase \"the engine hum a steady tune\"?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** Look at paragraph 5. What nonhuman thing is being personified in the phrase \"the engine hum a steady tune\"?\n\n**Criteria:** Student identifies the engine (or the train engine) as the nonhuman thing being personified.\n\n---"
+              "criteria": "Student identifies the engine (or the train engine) as the nonhuman thing being personified.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 5",
               "type": "tdq",
               "question": "What human quality is used to describe this nonhuman thing?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** What human quality is used to describe this nonhuman thing?\n\n**Criteria:** Student explains that humming a steady tune is the human quality used — humming or singing a tune is something people do, not machines.\n\n---\n\n### CONTENT BLOCKS: TYPE 2 (TRANSITION TO TT)\n\n->Now that we've explored how the author uses personification in Chapter 2, let's look at one more example in the text and answer two final questions about it.\n\n---\n\n### Section 2: Assessment"
+              "criteria": "Student explains that humming a steady tune is the human quality used — humming or singing a tune is something people do, not machines.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Assessment — Target Task (TDQ Target Task ELEM)",
+              "type": "tdq",
+              "question": "Look at paragraph 9. In the sentence \"It was calling my name,\" what nonhuman thing is being personified?",
+              "criteria": "Student identifies the large plot of flat land (or the land) as the nonhuman thing being personified.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Extension Question",
+              "type": "extension",
+              "question": "The narrator says the flat land was \"calling my name.\" Based on what you read in Chapter 2, why do you think the author chose this particular way to describe the land?",
+              "criteria": "Student connects the personification to the narrator's emotional response — explaining why hearing the land \"call\" his name fits his excitement, sense of belonging, or determination to find the perfect spot for farming.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             }
           ]
         },
@@ -124,51 +165,102 @@ window.DATA = {
               "title": "Question 1",
               "type": "lcq",
               "question": "What is the narrator hoping to find in Houston?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** lcq\n- **Question:** What is the narrator hoping to find in Houston?\n\n**Criteria:** Student explains that the narrator is hoping to find the best land possible for growing Japanese seed rice (or for rice cultivation/farming).\n\n---"
+              "criteria": "Student explains that the narrator is hoping to find the best land possible for growing Japanese seed rice (or for rice cultivation/farming).",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 2",
               "type": "highlight as answer",
               "question": "Highlight one sentence in paragraph 7 that shows an example of personification.",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** highlight as answer\n- **Question:** Highlight one sentence in paragraph 7 that shows an example of personification.\n\n**Criteria:** Student highlights either \"The sticky moisture in the air kissed my face\" or \"The sun was stretching its warmth in every direction\" from paragraph 7.\n\n---"
+              "criteria": "Student highlights either \"The sticky moisture in the air kissed my face\" or \"The sun was stretching its warmth in every direction\" from paragraph 7.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 3",
               "type": "mpchoice",
               "question": "Read the sentence from paragraph 7. Which answer identifies what is being personified and the human quality it is given?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Passage:** \"The sun was stretching its warmth in every direction.\"\n- **Question:** Read the sentence from paragraph 7. Which answer identifies what is being personified and the human quality it is given?\n\n- A. The sun; it is given the human quality of stretching.\n- B. The warmth; it is given the human quality of spreading.\n- C. The air; it is given the human quality of kissing.\n- D. The climate; it is given the human quality of feeling perfect.\n\n- Answer: A\n- **Distractor Rationale:**\n  - B: Students may focus on \"warmth\" since it's what's being stretched, but warmth is the object of the action — the sun is the subject performing it.\n  - C: Students may recall the other personification example from the same paragraph and confuse which sentence is being analyzed.\n  - D: Students may misread \"This climate will be perfect for cultivating rice\" as personification, but that is the narrator's thought — the climate is not performing a human action.\n- **Correct Answer Rationale:** Option A is correct. \"The sun was stretching its warmth in every direction\" gives the sun a human quality (stretching). The sun is a nonhuman thing described as performing a human action.\n\n---"
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The sun; it is given the human quality of stretching."
+                },
+                {
+                  "letter": "B",
+                  "text": "The warmth; it is given the human quality of spreading."
+                },
+                {
+                  "letter": "C",
+                  "text": "The air; it is given the human quality of kissing."
+                },
+                {
+                  "letter": "D",
+                  "text": "The climate; it is given the human quality of feeling perfect."
+                }
+              ],
+              "correct_letter": "A",
+              "correct_rationale": "Option A is correct. \"The sun was stretching its warmth in every direction\" gives the sun a human quality (stretching). The sun is a nonhuman thing described as performing a human action.",
+              "distractor_rationales": {
+                "B": "Students may focus on \"warmth\" since it's what's being stretched, but warmth is the object of the action — the sun is the subject performing it.",
+                "C": "Students may recall the other personification example from the same paragraph and confuse which sentence is being analyzed.",
+                "D": "Students may misread \"This climate will be perfect for cultivating rice\" as personification, but that is the narrator's thought — the climate is not performing a human action."
+              }
             },
             {
               "title": "Question 4",
               "type": "tdq",
               "question": "What nonhuman thing is being personified?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Passage:** \"Eventually, I saw a large plot of flat land. It was calling my name. I reached down and grabbed a handful of soil. The soil was moist in the palm of my hand.\"\n- **Question:** What nonhuman thing is being personified?\n\n**Criteria:** Student identifies the large plot of flat land (or the land) as the nonhuman thing being personified in paragraph 9.\n\n---"
+              "criteria": "Student identifies the large plot of flat land (or the land) as the nonhuman thing being personified in paragraph 9.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 5",
               "type": "tdq",
               "question": "What human quality does Shinpei Mykawa use to describe the land?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Passage:** \"Eventually, I saw a large plot of flat land. It was calling my name. I reached down and grabbed a handful of soil. The soil was moist in the palm of my hand.\"\n- **Question:** What human quality does Shinpei Mykawa use to describe the land?\n\n**Criteria:** Student identifies calling (or calling someone's name, speaking, or calling out) as the human quality used to personify the land in paragraph 9.\n\n---\n\n### CONTENT BLOCKS: TYPE 2 (TRANSITION TO TT)\n\n->Now that we've explored how Mykawa uses personification throughout Chapter 2, let's see if you can identify it in one more example from the text.\n\n---\n\n### Section 2: Assessment"
+              "criteria": "Student identifies calling (or calling someone's name, speaking, or calling out) as the human quality used to personify the land in paragraph 9.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Assessment Question 1",
+              "type": "tdq",
+              "question": "Look at paragraph 5. What nonhuman thing is being personified?",
+              "criteria": "Student identifies the engine (or train engine) as the nonhuman thing being personified in paragraph 5.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Assessment Question 2",
+              "type": "tdq",
+              "question": "What human quality does Mykawa use to describe the engine in paragraph 5?",
+              "criteria": "Student identifies humming a tune (or humming, making music, or singing) as the human quality used to describe the engine in paragraph 5.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Extension Question",
+              "type": "extension",
+              "question": "Mykawa closed his eyes and imagined the land filled with rice crops before he had planted a single seed. Why do you think he was so certain this plan would work?",
+              "criteria": "Student offers a response grounded in the text, drawing on Mykawa's observations, feelings, or plans described in Chapter 2.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             }
           ]
         },
@@ -181,61 +273,82 @@ window.DATA = {
               "title": "Question 1",
               "type": "lcq",
               "question": "What is the narrator hoping to find in Houston?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** lcq\n- **Question:** What is the narrator hoping to find in Houston?\n\n**Criteria:** Student identifies that the narrator hopes to find land suitable for growing Japanese seed rice and a Japanese community."
+              "criteria": "Student identifies that the narrator hopes to find land suitable for growing Japanese seed rice and a Japanese community.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 2",
               "type": "highlight",
               "question": "Highlight one example of personification from paragraph 7.",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** highlight\n- **Question:** Highlight one example of personification from paragraph 7.\n\n**Criteria:** Student highlights a personification example from paragraph 7, such as \"kissed my face\" or \"stretching its warmth.\""
+              "criteria": "Student highlights a personification example from paragraph 7, such as \"kissed my face\" or \"stretching its warmth.\"",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 3",
               "type": "mpchoice",
               "question": "Which answer best describes the personification in paragraph 7?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** Which answer best describes the personification in paragraph 7?\n- A. The air is given the human quality of kissing, and the sun is given the human quality of stretching.\n- B. The moisture is described as sticky, and the sun is described as warm.\n- C. The narrator feels the air on his face and the sun on his skin.\n- D. The climate is compared to a person who enjoys growing rice.\n- Answer: A\n- **Distractor Rationale:**\n  - B: This option identifies sensory details (sticky, warm) but confuses adjectives describing physical properties with personification. Sticky moisture and warm sun are literal descriptions, not human qualities given to nonhuman things.\n  - C: This option describes the narrator's literal physical sensations rather than identifying the figurative language. The question asks about personification — what human qualities the nonhuman things are given — not what the narrator physically experiences.\n  - D: This option invents a comparison not present in the text. The passage does not compare the climate to a person; it gives specific human actions (kissing, stretching) to specific nonhuman things (air/moisture, sun).\n- **Correct Answer Rationale:** Option A is correct. In paragraph 7, the author writes \"The sticky moisture in the air kissed my face,\" giving the air/moisture the human action of kissing, and \"The sun was stretching its warmth in every direction,\" giving the sun the human action of stretching. Both are examples of personification because nonhuman things (air and sun) are described with human qualities (kissing and stretching).\n\n---\n\n### CONTENT BLOCKS: TYPE 2 (TRANSITION TO TT)\n\n->Now that we've practiced identifying personification and its parts, let's answer two final questions about a different example of personification from the chapter.\n\n---\n\n### Section 2: Assessment"
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "The air is given the human quality of kissing, and the sun is given the human quality of stretching."
+                },
+                {
+                  "letter": "B",
+                  "text": "The moisture is described as sticky, and the sun is described as warm."
+                },
+                {
+                  "letter": "C",
+                  "text": "The narrator feels the air on his face and the sun on his skin."
+                },
+                {
+                  "letter": "D",
+                  "text": "The climate is compared to a person who enjoys growing rice."
+                }
+              ],
+              "correct_letter": "A",
+              "correct_rationale": "Option A is correct. In paragraph 7, the author writes \"The sticky moisture in the air kissed my face,\" giving the air/moisture the human action of kissing, and \"The sun was stretching its warmth in every direction,\" giving the sun the human action of stretching. Both are examples of personification because nonhuman things (air and sun) are described with human qualities (kissing and stretching).",
+              "distractor_rationales": {
+                "B": "This option identifies sensory details (sticky, warm) but confuses adjectives describing physical properties with personification. Sticky moisture and warm sun are literal descriptions, not human qualities given to nonhuman things.",
+                "C": "This option describes the narrator's literal physical sensations rather than identifying the figurative language. The question asks about personification — what human qualities the nonhuman things are given — not what the narrator physically experiences.",
+                "D": "This option invents a comparison not present in the text. The passage does not compare the climate to a person; it gives specific human actions (kissing, stretching) to specific nonhuman things (air/moisture, sun)."
+              }
             },
             {
               "title": "Question 4",
               "type": "tdq",
               "question": "Reread paragraph 9. What nonhuman things are being personified?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** Reread paragraph 9. What nonhuman things are being personified?\n\n**Criteria:** Student identifies that the land (or the plot of flat land) is the nonhuman thing being personified in paragraph 9."
+              "criteria": "Student identifies that the land (or the plot of flat land) is the nonhuman thing being personified in paragraph 9.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 5",
               "type": "tdq",
               "question": "In paragraph 9, what human qualities are used to describe the nonhuman things?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** In paragraph 9, what human qualities are used to describe the nonhuman things?\n\n**Criteria:** Student identifies the human quality of calling, quoting \"It was calling my name\" from paragraph 9.\n\n---\n\n### Section 3: Extension"
+              "criteria": "Student identifies the human quality of calling, quoting \"It was calling my name\" from paragraph 9.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Extension",
               "type": "extension",
               "question": "Why might the author use personification to describe the narrator's experience arriving in Houston? What effect does it have on the reader?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** extension\n- **Question:** Why might the author use personification to describe the narrator's experience arriving in Houston? What effect does it have on the reader?\n\n**Criteria:** Student explains the effect of personification, such as making the setting feel alive or showing the narrator's connection to the land.\n\n---\n\n## CONTENT BLOCKS: TYPE 3 (CONCLUSION)\n\n->Great work today! You practiced identifying personification and breaking it down — finding the nonhuman thing and the human quality the author gives it.\n\n->Now you can: spot personification in any text you read and explain how authors use it to make their writing more vivid and expressive. Keep an eye out for it next time you're reading!"
+              "criteria": "Student explains the effect of personification, such as making the setting feel alive or showing the narrator's connection to the land.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             }
           ]
         }
@@ -351,80 +464,185 @@ window.DATA = {
               "type": "mpchoice",
               "question": "What type of context clue does the author use to help the reader understand the word \"hiss\" in paragraph 23?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** What type of context clue does the author use to help the reader understand the word \"hiss\" in paragraph 23?\n- A. Comparison\n- B. Contrast\n- C. Definition\n- D. Example\n- Answer: C\n- **Distractor Rationale:**\n  - A: A comparison clue would use signal words like \"like\" or \"as\" to compare the hiss to something else; instead, the author directly defines it.\n  - B: A contrast clue would use signal words like \"but\" or \"unlike\" to show what the hiss is NOT; the text provides no contrast.\n  - D: An example clue would list multiple instances; the author instead provides a single direct description of what the sound is.\n- **Correct Answer Rationale:** Option C is correct. The phrase \"a horrid cold sound\" immediately after the dash directly defines what the hiss sounds like, making this a definition context clue."
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "Comparison"
+                },
+                {
+                  "letter": "B",
+                  "text": "Contrast"
+                },
+                {
+                  "letter": "C",
+                  "text": "Definition"
+                },
+                {
+                  "letter": "D",
+                  "text": "Example"
+                }
+              ],
+              "correct_letter": "C",
+              "correct_rationale": "Option C is correct. The phrase \"a horrid cold sound\" immediately after the dash directly defines what the hiss sounds like, making this a definition context clue.",
+              "distractor_rationales": {
+                "A": "A comparison clue would use signal words like \"like\" or \"as\" to compare the hiss to something else; instead, the author directly defines it.",
+                "B": "A contrast clue would use signal words like \"but\" or \"unlike\" to show what the hiss is NOT; the text provides no contrast.",
+                "D": "An example clue would list multiple instances; the author instead provides a single direct description of what the sound is."
+              }
             },
             {
               "title": "Question 2",
               "type": "tdq",
               "question": "How do the surrounding details in paragraph 23 help you understand what kind of sound the \"hiss\" is?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** How do the surrounding details in paragraph 23 help you understand what kind of sound the \"hiss\" is?\n\n**Criteria:** Student explains that \"a horrid cold sound\" defines the hiss as unpleasant and threatening, and that Rikki-tikki's fearful reaction (\"jump back two clear feet\") confirms it is a frightening, dangerous sound."
+              "criteria": "Student explains that \"a horrid cold sound\" defines the hiss as unpleasant and threatening, and that Rikki-tikki's fearful reaction (\"jump back two clear feet\") confirms it is a frightening, dangerous sound.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Question 3",
               "type": "mpchoice",
               "question": "Which phrase from paragraph 25 is a context clue for the meaning of \"spectacle-mark\"?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** Which phrase from paragraph 25 is a context clue for the meaning of \"spectacle-mark\"?\n- A. \"He spread out his hood more than ever\"\n- B. \"looks exactly like the eye part of a hook-and-eye fastening\"\n- C. \"it is impossible for a mongoose to stay frightened\"\n- D. \"his mother had fed him on dead ones\"\n- Answer: B\n- **Distractor Rationale:**\n  - A: This describes Nag's action of spreading his hood but does not explain what the spectacle-mark looks like.\n  - C: This describes Rikki-tikki's nature and has no connection to the meaning of \"spectacle-mark.\"\n  - D: This describes Rikki-tikki's background and does not relate to the spectacle-mark at all.\n- **Correct Answer Rationale:** Option B is correct. The phrase \"looks exactly like the eye part of a hook-and-eye fastening\" uses a comparison to describe the spectacle-mark's appearance, directly helping the reader understand what it looks like."
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "\"He spread out his hood more than ever\""
+                },
+                {
+                  "letter": "B",
+                  "text": "\"looks exactly like the eye part of a hook-and-eye fastening\""
+                },
+                {
+                  "letter": "C",
+                  "text": "\"it is impossible for a mongoose to stay frightened\""
+                },
+                {
+                  "letter": "D",
+                  "text": "\"his mother had fed him on dead ones\""
+                }
+              ],
+              "correct_letter": "B",
+              "correct_rationale": "Option B is correct. The phrase \"looks exactly like the eye part of a hook-and-eye fastening\" uses a comparison to describe the spectacle-mark's appearance, directly helping the reader understand what it looks like.",
+              "distractor_rationales": {
+                "A": "This describes Nag's action of spreading his hood but does not explain what the spectacle-mark looks like.",
+                "C": "This describes Rikki-tikki's nature and has no connection to the meaning of \"spectacle-mark.\"",
+                "D": "This describes Rikki-tikki's background and does not relate to the spectacle-mark at all."
+              }
             },
             {
               "title": "Question 4",
               "type": "mpchoice",
               "question": "Based on context clues in paragraph 25, what does \"spectacle-mark\" most likely refer to?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** Based on context clues in paragraph 25, what does \"spectacle-mark\" most likely refer to?\n- A. A scar from a previous fight\n- B. A marking that resembles an eye shape\n- C. A colorful pattern of stripes\n- D. A rough patch of scales\n- Answer: B\n- **Distractor Rationale:**\n  - A: Nothing in the passage suggests the mark came from a fight or injury; it is described as a natural feature on \"all our people.\"\n  - C: The comparison to \"the eye part of a hook-and-eye fastening\" describes a shape, not colorful stripes.\n  - D: The comparison is to an eye-shaped fastening, not a texture like rough scales.\n- **Correct Answer Rationale:** Option B is correct. The comparison \"looks exactly like the eye part of a hook-and-eye fastening\" reveals that the spectacle-mark is an eye-shaped marking on the back of Nag's hood."
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "A scar from a previous fight"
+                },
+                {
+                  "letter": "B",
+                  "text": "A marking that resembles an eye shape"
+                },
+                {
+                  "letter": "C",
+                  "text": "A colorful pattern of stripes"
+                },
+                {
+                  "letter": "D",
+                  "text": "A rough patch of scales"
+                }
+              ],
+              "correct_letter": "B",
+              "correct_rationale": "Option B is correct. The comparison \"looks exactly like the eye part of a hook-and-eye fastening\" reveals that the spectacle-mark is an eye-shaped marking on the back of Nag's hood.",
+              "distractor_rationales": {
+                "A": "Nothing in the passage suggests the mark came from a fight or injury; it is described as a natural feature on \"all our people.\"",
+                "C": "The comparison to \"the eye part of a hook-and-eye fastening\" describes a shape, not colorful stripes.",
+                "D": "The comparison is to an eye-shaped fastening, not a texture like rough scales."
+              }
             },
             {
               "title": "Question 5",
               "type": "tdq",
               "question": "How do details in paragraphs 24 and 25 help you picture what Nag's \"hood\" is?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** tdq\n- **Question:** How do details in paragraphs 24 and 25 help you picture what Nag's \"hood\" is?\n\n**Criteria:** Student uses context clues from both paragraphs — \"spread his hood to keep the sun off Brahm\" (paragraph 24, showing it can extend outward like a shield) and \"spread out his hood more than ever, and Rikki-tikki saw the spectacle-mark on the back of it\" (paragraph 25, showing it has a flat back surface) — to describe the hood as a wide, flat body part the cobra spreads out from its head.\n\n---\n\n### CONTENT BLOCKS: TYPE 2 (TRANSITION TO TT)\n\n-> Now that we've practiced identifying and using context clues, let's answer two final questions about word meanings in the passage.\n\n---\n\n### Section 2: Assessment"
+              "criteria": "Student uses context clues from both paragraphs — \"spread his hood to keep the sun off Brahm\" (paragraph 24, showing it can extend outward like a shield) and \"spread out his hood more than ever, and Rikki-tikki saw the spectacle-mark on the back of it\" (paragraph 25, showing it has a flat back surface) — to describe the hood as a wide, flat body part the cobra spreads out from its head.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Assessment Question 1",
               "type": "mpchoice",
               "question": "What textual evidence suggests that the word cowered means \"bent one's body out of fear\"?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** What textual evidence suggests that the word cowered means \"bent one's body out of fear\"?\n- A. … down in the nest without answering.\n- B. … jump back two clear feet.\n- C. … stayed balancing to and fro ...\n- D. … that never change their expression ...\n- Answer: A\n- **Distractor Rationale:**\n  - B: \"Jump back two clear feet\" describes Rikki-tikki's startled reaction, which shows surprise and a quick movement — not the sustained, crouching posture implied by \"cowered.\"\n  - C: \"Stayed balancing to and fro\" describes Nag's swaying cobra pose — a confident, threatening posture, the opposite of cowering in fear.\n  - D: \"That never change their expression\" describes Nag's eyes, which show coldness and control — not fear or a bent-down body posture.\n- **Correct Answer Rationale:** Option A is correct. \"Down in the nest without answering\" shows Darzee and his wife physically lowering themselves (bending their bodies downward) and being too afraid to respond, which directly supports the definition of \"cowered\" as \"bent one's body out of fear.\""
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "… down in the nest without answering."
+                },
+                {
+                  "letter": "B",
+                  "text": "… jump back two clear feet."
+                },
+                {
+                  "letter": "C",
+                  "text": "… stayed balancing to and fro ..."
+                },
+                {
+                  "letter": "D",
+                  "text": "… that never change their expression ..."
+                }
+              ],
+              "correct_letter": "A",
+              "correct_rationale": "Option A is correct. \"Down in the nest without answering\" shows Darzee and his wife physically lowering themselves (bending their bodies downward) and being too afraid to respond, which directly supports the definition of \"cowered\" as \"bent one's body out of fear.\"",
+              "distractor_rationales": {
+                "B": "\"Jump back two clear feet\" describes Rikki-tikki's startled reaction, which shows surprise and a quick movement — not the sustained, crouching posture implied by \"cowered.\"",
+                "C": "\"Stayed balancing to and fro\" describes Nag's swaying cobra pose — a confident, threatening posture, the opposite of cowering in fear.",
+                "D": "\"That never change their expression\" describes Nag's eyes, which show coldness and control — not fear or a bent-down body posture."
+              }
             },
             {
               "title": "Assessment Question 2",
               "type": "mpchoice",
               "question": "If you did not know what the word tuft meant, what meaning would be most likely, based on context clues in the passage?",
               "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** mpchoice\n- **Question:** If you did not know what the word tuft meant, what meaning would be most likely, based on context clues in the passage?\n\nWhen he had lifted one-third of himself clear of the ground, he stayed balancing to and fro exactly as a dandelion tuft balances in the wind, and he looked at Rikki-tikki with the wicked snake's eyes that never change their expression, whatever the snake may be thinking of.\n\n- A. a stem\n- B. a root\n- C. a bouquet\n- D. a bunch or cluster of small, soft parts\n- Answer: D\n- **Distractor Rationale:**\n  - A: A stem is rigid and would not balance gently in the wind the way the simile describes; the comparison emphasizes lightness and softness.\n  - B: A root is underground and heavy — it cannot balance in the wind, making it incompatible with the simile's image of floating movement.\n  - C: A bouquet is a large, heavy bunch of flowers that would not balance delicately in the wind; the simile emphasizes something small and light.\n- **Correct Answer Rationale:** Option D is correct. The comparison \"exactly as a dandelion tuft balances in the wind\" uses the image of something light and airy swaying gently. A dandelion tuft — the fluffy seed head — is literally \"a bunch or cluster of small, soft parts\" that floats and balances in the wind, matching the description perfectly.\n\n---\n\n### Section 3: Extension"
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "a stem"
+                },
+                {
+                  "letter": "B",
+                  "text": "a root"
+                },
+                {
+                  "letter": "C",
+                  "text": "a bouquet"
+                },
+                {
+                  "letter": "D",
+                  "text": "a bunch or cluster of small, soft parts"
+                }
+              ],
+              "correct_letter": "D",
+              "correct_rationale": "Option D is correct. The comparison \"exactly as a dandelion tuft balances in the wind\" uses the image of something light and airy swaying gently. A dandelion tuft — the fluffy seed head — is literally \"a bunch or cluster of small, soft parts\" that floats and balances in the wind, matching the description perfectly.",
+              "distractor_rationales": {
+                "A": "A stem is rigid and would not balance gently in the wind the way the simile describes; the comparison emphasizes lightness and softness.",
+                "B": "A root is underground and heavy — it cannot balance in the wind, making it incompatible with the simile's image of floating movement.",
+                "C": "A bouquet is a large, heavy bunch of flowers that would not balance delicately in the wind; the simile emphasizes something small and light."
+              }
             },
             {
               "title": "Extension",
               "type": "extension",
               "question": "Nag says \"Look, and be afraid!\" in paragraph 24. Why might Nag want other animals to feel fear before he attacks?",
-              "criteria": "",
-              "explanation": "",
-              "highlight_target": "",
-              "options_correct": "",
-              "raw": "- **Question Type:** extension\n- **Question:** Nag says \"Look, and be afraid!\" in paragraph 24. Why might Nag want other animals to feel fear before he attacks?\n\n**Criteria:** Student speculates about Nag's motivation for using fear as a weapon, grounding their reasoning in details from the excerpt such as his dramatic entrance, his speech about Brahm, or his display of the hood.\n\n---\n\n## CONTENT BLOCKS: TYPE 3 (CONCLUSION)\n\n-> Nice work! Context clues are one of the most useful reading strategies you have — they let you figure out new words without reaching for a dictionary.\n\n-> Next time you encounter an unfamiliar word, look for definitions, comparisons, contrasts, or examples nearby. The author almost always leaves you a hint."
+              "criteria": "Student speculates about Nag's motivation for using fear as a weapon, grounding their reasoning in details from the excerpt such as his dramatic entrance, his speech about Brahm, or his display of the hood.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             }
           ]
         }

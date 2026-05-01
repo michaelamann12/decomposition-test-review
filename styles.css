@@ -324,6 +324,78 @@ details[open] > summary {
   margin-bottom: 2px;
 }
 
+/* MC options + rationales (apply in side-by-side AND stacked modes) */
+.qopts {
+  list-style: none;
+  margin: 6px 0 4px 0;
+  padding: 0;
+  font-size: 12.5px;
+}
+.qopts .qopt {
+  display: grid;
+  grid-template-columns: 22px 1fr 18px;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  align-items: start;
+}
+.qopts .qopt-correct {
+  background: rgba(135, 196, 156, 0.4);
+  border-color: rgba(70, 145, 100, 0.55);
+  font-weight: 500;
+}
+.qopt-letter {
+  font-weight: 600;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.qopt-correct .qopt-letter {
+  color: #2e6b3f;
+}
+.qopt-text { line-height: 1.4; }
+.qopt-mark {
+  color: #2e6b3f;
+  font-weight: 700;
+  text-align: right;
+}
+
+details.qdistractors {
+  margin-top: 6px;
+  border-top: 1px dashed var(--border);
+  padding-top: 6px;
+}
+details.qdistractors > summary {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 2px 0;
+}
+details.qdistractors > summary:hover { color: var(--text); }
+ul.qdr-list {
+  list-style: none;
+  margin: 6px 0 0 0;
+  padding-left: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+ul.qdr-list li {
+  padding: 4px 6px;
+  border-left: 2px solid var(--border-strong);
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+.qdr-letter {
+  font-weight: 700;
+  font-family: var(--mono);
+  margin-right: 4px;
+  color: var(--text);
+}
+
 /* Stacked mode */
 .stacked-question {
   background: var(--surface);

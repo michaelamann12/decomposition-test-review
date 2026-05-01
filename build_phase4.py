@@ -30,47 +30,158 @@ BLUEBONNET_LESSON_ID = "TX_BBO_XX_G5_1.0_2_v1"
 
 
 # ---------------------------------------------------------------------------
-# Question extraction (mirrors logic in build_data.py)
+# Question extraction — line-by-line state-machine parser.
+#
+# The activity content uses a mix of formats inside a single question block:
+#   - bulleted fields:        - **Question Type:** mpchoice
+#   - standalone bold fields: **Criteria:** Student identifies...
+#   - MC option list:         - A. text / - A: text
+#   - Answer line:            - Answer: C
+#   - Distractor Rationale block: - **Distractor Rationale:**
+#                                   - A: ...
+#                                   - B: ...
+#
+# The previous parser only matched the bulleted form, so non-MC criteria
+# (which are written as standalone bold lines) were silently empty for every
+# question. Maura's "criteria are invisible in the dashboard" feedback traces
+# back to this. New parser captures all three forms.
 # ---------------------------------------------------------------------------
 def extract_questions(activity_md: str) -> list:
     if not activity_md:
         return []
+
     questions = []
-    pattern = re.compile(r"^####\s+(.+?)\s*$", re.MULTILINE)
-    matches = list(pattern.finditer(activity_md))
-    for i, m in enumerate(matches):
-        title = m.group(1).strip()
-        if not (
-            title.lower().startswith("question")
-            or title.lower().startswith("part ")
-            or title.lower() == "extension"
-            or title.lower() == "claim question"
-            or "short write" in title.lower()
-            or "quick write" in title.lower()
-            or "extension question" in title.lower()
-            or "assessment" in title.lower()
-        ):
+    cur = None
+    cur_field = None        # field currently accumulating (for multi-line standalone fields)
+    cur_lines: list = []    # accumulated value lines for cur_field
+    in_distractor = False   # inside "- **Distractor Rationale:**" sub-bullet block
+
+    def is_question_heading(title: str) -> bool:
+        tl = title.lower()
+        return (
+            tl.startswith("question")
+            or tl.startswith("part ")
+            or tl == "extension"
+            or tl == "claim question"
+            or "short write" in tl
+            or "quick write" in tl
+            or "extension question" in tl
+            or "assessment" in tl
+        )
+
+    def flush_field():
+        nonlocal cur_field, cur_lines
+        if cur is not None and cur_field is not None:
+            val = "\n".join(cur_lines).strip()
+            if val:
+                cur[cur_field] = val
+        cur_field = None
+        cur_lines = []
+
+    def flush_question():
+        nonlocal cur, in_distractor
+        flush_field()
+        if cur is not None:
+            questions.append(cur)
+        cur = None
+        in_distractor = False
+
+    heading_re = re.compile(r"^####\s+(.+?)\s*$")
+    bullet_field_re = re.compile(r"^-\s+\*\*([^:]+):\*\*\s*(.*)$")
+    standalone_field_re = re.compile(r"^\*\*([^:]+):\*\*\s*(.*)$")
+    option_re = re.compile(r"^-\s+([A-D])[\.\:]\s+(.+)$")
+    answer_re = re.compile(r"^-\s+Answer:\s+([A-D])\s*$")
+    distractor_sub_re = re.compile(r"^\s+-\s+([A-D]):\s*(.+)$")
+    section_break_re = re.compile(r"^(?:---|##\s|###\s)")
+
+    for line in activity_md.split("\n"):
+        h = heading_re.match(line)
+        if h:
+            flush_question()
+            title = h.group(1).strip()
+            if is_question_heading(title):
+                cur = {
+                    "title": title,
+                    "type": "",
+                    "question": "",
+                    "criteria": "",
+                    "options": [],
+                    "correct_letter": "",
+                    "correct_rationale": "",
+                    "distractor_rationales": {},
+                }
             continue
-        start = m.end()
-        end = matches[i + 1].start() if i + 1 < len(matches) else len(activity_md)
-        block = activity_md[start:end].strip()
-        fields = {}
-        for line in block.splitlines():
-            field_match = re.match(r"^-\s+\*\*([^:]+):\*\*\s*(.*)$", line)
-            if field_match:
-                k = field_match.group(1).strip().lower().replace(" ", "_")
-                v = field_match.group(2).strip()
-                fields[k] = v
-        questions.append({
-            "title": title,
-            "type": fields.get("question_type", ""),
-            "question": fields.get("question", ""),
-            "criteria": fields.get("criteria", ""),
-            "explanation": fields.get("explanation", ""),
-            "highlight_target": fields.get("highlight_target", ""),
-            "options_correct": fields.get("correct_answer", ""),
-            "raw": block,
-        })
+
+        if cur is None:
+            continue
+
+        if section_break_re.match(line):
+            flush_question()
+            continue
+
+        b = bullet_field_re.match(line)
+        if b:
+            flush_field()
+            in_distractor = False
+            field = b.group(1).strip().lower()
+            value = b.group(2).strip()
+            if field == "question type":
+                cur["type"] = value
+            elif field == "question":
+                cur["question"] = value
+            elif field == "criteria":
+                cur_field = "criteria"
+                cur_lines = [value] if value else []
+            elif field == "correct answer rationale":
+                cur_field = "correct_rationale"
+                cur_lines = [value] if value else []
+            elif field == "distractor rationale":
+                in_distractor = True
+            continue
+
+        s = standalone_field_re.match(line)
+        if s:
+            flush_field()
+            in_distractor = False
+            field = s.group(1).strip().lower()
+            value = s.group(2).strip()
+            if field == "criteria":
+                cur_field = "criteria"
+                cur_lines = [value] if value else []
+            elif field == "correct answer rationale":
+                cur_field = "correct_rationale"
+                cur_lines = [value] if value else []
+            continue
+
+        if in_distractor:
+            d = distractor_sub_re.match(line)
+            if d:
+                cur["distractor_rationales"][d.group(1)] = d.group(2).strip()
+                continue
+            if line.strip() == "":
+                # blank line ends the distractor sub-list
+                in_distractor = False
+
+        o = option_re.match(line)
+        if o:
+            cur["options"].append({"letter": o.group(1), "text": o.group(2).strip()})
+            continue
+
+        a = answer_re.match(line)
+        if a:
+            cur["correct_letter"] = a.group(1)
+            continue
+
+        # Multi-line continuation of the active standalone/bullet field.
+        # A blank line ends accumulation (criteria + rationales are typically
+        # single paragraphs in this format).
+        if cur_field is not None:
+            if line.strip() == "" and cur_lines:
+                flush_field()
+            else:
+                cur_lines.append(line)
+
+    flush_question()
     return questions
 
 
@@ -287,6 +398,17 @@ def main():
     out["lessons"][PHASE4_LESSON_ID] = phase4
     if PHASE4_LESSON_ID not in out.get("lesson_order", []):
         out.setdefault("lesson_order", [BLUEBONNET_LESSON_ID]).append(PHASE4_LESSON_ID)
+
+    # Re-parse every stored activity_md so the criteria + MC option/rationale
+    # fields get populated under the new schema. The previous parser missed
+    # standalone bold fields, so all `criteria` slots have been silently empty.
+    for lid, lesson in out["lessons"].items():
+        for vkey in ("v2_original", "v3_review", "v4_current"):
+            ver = lesson.get("versions", {}).get(vkey)
+            if not ver:
+                continue
+            md_text = ver.get("activity_md") or ""
+            ver["questions"] = extract_questions(md_text)
 
     js = "window.DATA = " + json.dumps(out, indent=2, ensure_ascii=False) + ";\n"
     DATA_JS.write_text(js, encoding="utf-8")
