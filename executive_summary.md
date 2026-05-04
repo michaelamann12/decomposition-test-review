@@ -99,7 +99,7 @@ This batch was deliberately run *after* a round of fixes on Friday, May 1, that 
 
 1. Fix `populate-lesson` `VERIFIED_EXISTS` false-positive (BUG-001).
 2. Fix `--from=pick-excerpt` silent halt on reuse mode (BUG-002).
-3. Move to adversarial review on this batch (as discussed with Codex and Claude).
+3. Move to adversarial review on V2 (as discussed with Codex and Claude).
 
 ---
 
