@@ -30,17 +30,20 @@ CLONE = GDRIVE / "My Drive/project-clone"
 
 MP_CSV = CLONE / "module_plans/Bluebonnet/G5/TX_BBO_XX_G5_M1 Unit Overview - Personal Narratives.csv"
 
-# Per-lesson: (lesson_id, run_folder_name, build_label, build_pill_class, generated_at)
-# build_pill_class controls the colored pill on the lesson tab:
-#   "rerun"  → "RERUN — May 4" (lessons that halted May 1, resumed May 4)
-#   "build"  → "BUILD — May 1" (first-pass batch lessons that completed cleanly)
+LIVE_DRIVE = GDRIVE / "Shared drives/2026-27 Activity Creation"
+
+# Per-lesson: (lesson_id, v4_run_folder_name, review_ready_folder_name,
+#             build_label, build_pill_class, generated_at)
+# review_ready folder is in LIVE_DRIVE/review_ready/ and supplies v2 (Apr 20
+# monolith snapshot in _DO_NOT_EDIT/) and v3 (top-level contractor edit + Review_Summary.md).
+# Set review_ready_folder_name to "" if no review history exists for that lesson.
 LESSONS = [
-    ("TX_BBO_XX_G5_1.0_1_v1", "2026-05-01_TX_BBO_XX_G5_1.0_1_v1_r3", "BUILD — May 1", "build", "2026-05-01"),
-    ("TX_BBO_XX_G5_1.0_2_v1", "2026-05-04_TX_BBO_XX_G5_1.0_2_v1",    "RERUN — May 4", "rerun", "2026-05-04"),
-    ("TX_BBO_XX_G5_1.0_3_v1", "2026-05-01_TX_BBO_XX_G5_1.0_3_v1",    "RERUN — May 4", "rerun", "2026-05-04"),
-    ("TX_BBO_XX_G5_1.0_4_v1", "2026-05-01_TX_BBO_XX_G5_1.0_4_v1",    "RERUN — May 4", "rerun", "2026-05-04"),
-    ("TX_BBO_XX_G5_1.0_5_v1", "2026-05-01_TX_BBO_XX_G5_1.0_5_v1",    "BUILD — May 1", "build", "2026-05-01"),
-    ("TX_BBO_XX_G5_1.0_8_v1", "2026-05-01_TX_BBO_XX_G5_1.0_8_v1",    "RERUN — May 4", "rerun", "2026-05-04"),
+    ("TX_BBO_XX_G5_1.0_1_v1", "2026-05-01_TX_BBO_XX_G5_1.0_1_v1_r3", "2026-04-20_TX_BBO_XX_G5_1.0_1_v1", "BUILD — May 1", "build", "2026-05-01"),
+    ("TX_BBO_XX_G5_1.0_2_v1", "2026-05-04_TX_BBO_XX_G5_1.0_2_v1",    "",                                  "RERUN — May 4", "rerun", "2026-05-04"),  # v2/v3 already in dashboard
+    ("TX_BBO_XX_G5_1.0_3_v1", "2026-05-01_TX_BBO_XX_G5_1.0_3_v1",    "2026-04-20_TX_BBO_XX_G5_1.0_3_v1", "RERUN — May 4", "rerun", "2026-05-04"),
+    ("TX_BBO_XX_G5_1.0_4_v1", "2026-05-01_TX_BBO_XX_G5_1.0_4_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_4_v1", "RERUN — May 4", "rerun", "2026-05-04"),
+    ("TX_BBO_XX_G5_1.0_5_v1", "2026-05-01_TX_BBO_XX_G5_1.0_5_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_5_v1", "BUILD — May 1", "build", "2026-05-01"),
+    ("TX_BBO_XX_G5_1.0_8_v1", "2026-05-01_TX_BBO_XX_G5_1.0_8_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_8_v1", "RERUN — May 4", "rerun", "2026-05-04"),
 ]
 
 
@@ -63,14 +66,29 @@ def combined_dq_text(row: dict) -> str:
     return "\n\n".join(parts)
 
 
-def build_lesson(lesson_id: str, run_folder: str, build_label: str,
-                 build_pill_class: str, generated_at: str) -> dict:
+def build_lesson(lesson_id: str, run_folder: str, review_ready_folder: str,
+                 build_label: str, build_pill_class: str, generated_at: str) -> dict:
     run_dir = CLONE / "draft_outputs" / run_folder
     pipeline = run_dir / "_pipeline"
     snapshot_dir = run_dir / "_DO_NOT_EDIT"
 
     if not run_dir.exists():
         raise SystemExit(f"Run folder missing: {run_dir}")
+
+    # ----- v2 (Apr 20 monolith) + v3 (Apr 21 contractor edit) from review_ready/ -----
+    v2_md, v3_md, v3_review_md = "", "", ""
+    if review_ready_folder:
+        rr = LIVE_DRIVE / "review_ready" / review_ready_folder
+        if rr.exists():
+            v2_md = read_text(rr / "_DO_NOT_EDIT" / f"{lesson_id}_Activity_Content_ORIGINAL.md")
+            v3_md = read_text(rr / f"{lesson_id}_Activity_Content.md")
+            v3_review_md = read_text(rr / f"{lesson_id}_Review_Summary.md")
+            # If v2 snapshot is missing, fall back to the contractor's content as v2 baseline
+            # (rare; some folders only have post-edit state)
+            if not v2_md:
+                v2_md = v3_md
+        else:
+            print(f"  ! review_ready folder missing for {lesson_id}: {rr}")
 
     mp_row = parse_mp_row(lesson_id)
 
@@ -142,14 +160,22 @@ def build_lesson(lesson_id: str, run_folder: str, build_label: str,
         },
         "version_labels": {
             "v1": "Module Plan",
-            "v2": "Original Draft",
-            "v3": "Move-to-Review",
+            "v2": "Original Draft (Apr 20)",
+            "v3": "Move-to-Review (Apr 21)",
             "v4": f"V2 Output ({generated_at})",
         },
         "version_subtitles": {
             "v1": "What the module plan asked for",
-            "v2": "No Apr 20 monolith baseline exists for this lesson",
-            "v3": "No contractor review version exists for this lesson",
+            "v2": (
+                "Apr 20 monolith pipeline output (V1)"
+                if v2_md
+                else "No Apr 20 monolith baseline exists for this lesson"
+            ),
+            "v3": (
+                "Apr 21 contractor's edited version submitted to lead review"
+                if v3_md
+                else "No contractor review version exists for this lesson"
+            ),
             "v4": (
                 "May 4 V2 rerun output (resumed from May 1 halt with `--from=extract-requirements`)"
                 if build_pill_class == "rerun"
@@ -158,8 +184,8 @@ def build_lesson(lesson_id: str, run_folder: str, build_label: str,
         },
         "version_availability": {
             "v1": True,
-            "v2": False,
-            "v3": False,
+            "v2": bool(v2_md),
+            "v3": bool(v3_md),
             "v4": True,
         },
         "module_plan": {
@@ -173,8 +199,15 @@ def build_lesson(lesson_id: str, run_folder: str, build_label: str,
             "planning_notes": (mp_row.get("Planning Notes (optional)") or "").strip(),
         },
         "versions": {
-            "v2_original": {"activity_md": "", "questions": []},
-            "v3_review": {"activity_md": "", "review_summary_md": "", "questions": []},
+            "v2_original": {
+                "activity_md": v2_md,
+                "questions": extract_questions(v2_md),
+            },
+            "v3_review": {
+                "activity_md": v3_md,
+                "review_summary_md": v3_review_md,
+                "questions": extract_questions(v3_md),
+            },
             "v4_current": {
                 "activity_md": activity_md,
                 "match_report_md": match_md,
@@ -208,27 +241,24 @@ def main() -> None:
 
     out = existing
 
-    for lesson_id, folder, label, pill, generated in LESSONS:
-        new_lesson = build_lesson(lesson_id, folder, label, pill, generated)
+    for lesson_id, folder, review_folder, label, pill, generated in LESSONS:
+        new_lesson = build_lesson(lesson_id, folder, review_folder, label, pill, generated)
         prior = out["lessons"].get(lesson_id)
         if prior:
-            # Preserve V1 monolith + contractor review history if the lesson already
-            # has them — only refresh meta + v4 + artifacts. Avoids destroying the
-            # Phase 3 4-version comparison when 1.0_2 gets rerun.
-            new_lesson["versions"]["v2_original"] = prior.get("versions", {}).get("v2_original", new_lesson["versions"]["v2_original"])
-            new_lesson["versions"]["v3_review"] = prior.get("versions", {}).get("v3_review", new_lesson["versions"]["v3_review"])
+            # If the new build didn't load v2/v3 (no review_ready folder configured),
+            # fall back to whatever the prior data.js had so we don't blank out
+            # historical comparisons that were already populated.
+            if not new_lesson["versions"]["v2_original"].get("activity_md"):
+                new_lesson["versions"]["v2_original"] = prior.get("versions", {}).get("v2_original", new_lesson["versions"]["v2_original"])
+            if not new_lesson["versions"]["v3_review"].get("activity_md"):
+                new_lesson["versions"]["v3_review"] = prior.get("versions", {}).get("v3_review", new_lesson["versions"]["v3_review"])
+            # Recompute availability from the now-merged versions
             new_lesson["version_availability"] = {
                 "v1": True,
-                "v2": prior.get("version_availability", {}).get("v2", False),
-                "v3": prior.get("version_availability", {}).get("v3", False),
+                "v2": bool(new_lesson["versions"]["v2_original"].get("activity_md")),
+                "v3": bool(new_lesson["versions"]["v3_review"].get("activity_md")),
                 "v4": True,
             }
-            # Keep v2/v3 labels + subtitles from prior so headers stay informative
-            for vk in ("v2", "v3"):
-                if vk in prior.get("version_labels", {}):
-                    new_lesson["version_labels"][vk] = prior["version_labels"][vk]
-                if vk in prior.get("version_subtitles", {}):
-                    new_lesson["version_subtitles"][vk] = prior["version_subtitles"][vk]
             new_lesson["module_plan"] = prior.get("module_plan", new_lesson["module_plan"])
         out["lessons"][lesson_id] = new_lesson
         if lesson_id not in out.get("lesson_order", []):
@@ -248,9 +278,12 @@ def main() -> None:
     DATA_JS.write_text(js, encoding="utf-8")
     print(f"Wrote {DATA_JS} ({len(js):,} bytes)")
     for lid in out["lesson_order"]:
-        meta = out["lessons"][lid]["meta"]
+        L = out["lessons"][lid]
+        meta = L["meta"]
         pill = meta.get("build_label") or "—"
-        print(f"  {lid:<32} {pill}")
+        av = L.get("version_availability", {})
+        flags = "".join(["v" if av.get(k) else "·" for k in ("v1","v2","v3","v4")])
+        print(f"  {lid:<32} {flags}  {pill}")
 
 
 if __name__ == "__main__":
