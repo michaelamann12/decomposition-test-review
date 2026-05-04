@@ -64,32 +64,32 @@ When the activity catalog has no same-curriculum exemplars, V2's `find-exemplars
 
 ---
 
-## Bugs Avery flagged Friday — what was fixed
+## Skill improvements made Friday — before running these lessons
 
-*[Section TODO — fill in once we pull Avery's specific Friday feedback.]*
+This batch was deliberately run *after* a round of fixes on Friday, May 1, that targeted three patterns flagged in Bluebonnet G5 reviews the week of 4/20–4/27. The fixes went into the live skills Friday morning and were synced to the test version of the skills (the clone) Friday afternoon, so the May-1 batch and today's resumes ran against the updated rules.
 
-Suggested shape, once we have the list:
+**Three patterns the reviews surfaced:**
 
-- **[Issue 1, 1-line description]** — Fixed in `[skill]` on [date]. Verified in today's rerun of `TX_BBO_XX_G5_1.0_X` (output now [behavior]). Dashboard: link to lesson card.
-- **[Issue 2 …]** — …
+1. **A required question got moved to a different position** (Activity 1.0_1) — when the lesson plan specified the exact wording for a question, the editing step reordered it into a different slot, justifying the move as "better pedagogical flow." Required wording is supposed to stay where the lesson plan put it, not be optimized.
+2. **A multi-part required task got split into separate questions** (Activity 1.0_8) — a single required Target Task with multiple parts came out as two separate questions instead of one. The author had specified one task; the pipeline turned it into two.
+3. **The same format label produced different shapes across lessons** — `TDQ Target Task ELEM` (a format label used in module plans) was rendering four different ways across lessons 1, 3, 7, 9, 10. The pipeline was treating that label as a recipe instead of as a description; each lesson should have followed its own specified wording, not a generic template.
 
-Each fix should point down into the relevant lesson on the dashboard for proof. The criteria for closing this section: every Avery-flagged issue has either (a) been re-verified in a May-4 rerun, or (b) been moved to BUGS.md as a known open item with rationale.
+**What changed in the skills (May 1):**
 
----
+- **In the drafting step (`generate-activity`):** added three rules the pipeline now enforces every time it writes a draft —
+  - **Count:** you get exactly as many required questions as the lesson plan supplies — no more, no fewer.
+  - **Position:** required questions appear in the same order the lesson plan put them; generated questions fill the remaining slots.
+  - **Whole-piece boundary:** a single required item stays one rendered item — no splitting.
+  Also rewrote the rule about how the format label works: when the lesson plan provides exact wording for the assessment, the count and shape now come from that wording, not from a format-label default. `TDQ Target Task ELEM` is now treated as a description, not a template.
+- **In the editing step (`edit-draft`):** the verbatim-fidelity check now flags three new failure modes — count mismatch (stops the run), position drift (automatically corrected by putting the question back where the plan put it), and a single required item being split (stops the run). The progression check also got a carveout: it can no longer reorder required questions even if the progression looks off — those cases are now flagged for manual review instead.
+- **A pre-delivery gate** was added to the drafting step: before the activity is finalized, the pipeline re-reads what the author committed to and verifies all four rules against the rendered draft. Failures stop delivery and force a regeneration — they can't be quietly papered over.
 
-## What's still risky
+**How this batch's runs validate the fixes** `[suggestive]`:
 
-- **`populate-lesson` `VERIFIED_EXISTS` false-positive (BUG-001).** Production-relevant for any new curriculum coming online for the first time (Odell, AAL, Guidebooks). Should fail at Phase 1, not Phase 2.
-- **`--from=pick-excerpt` silent halt (BUG-002).** Breaks the exact recovery scenario `--from=` was meant to support.
-- **Avery's Friday feedback not yet fully closed in this memo.** Section above is a placeholder; the verdict above assumes those fixes hold up under re-test. Re-verify before promotion.
-
----
-
-## What we don't yet know
-
-- **Cross-curriculum exemplar fallback at scale.** Only one lesson has genuinely exercised this path. Need an Odell or AAL run.
-- **Throughput at scale.** Largest batch to date is 6 lessons (this one). Parallel runs across multiple lessons concurrently, or sustained throughput over a multi-day window, has not been exercised.
-- **Author response.** No author has yet edited a V2-produced draft end-to-end and given structured feedback. Avery's Friday review is the closest signal; it's qualitative, on a small sample.
+- **Lesson 1.0_1's V2 output** keeps the required question in the position the lesson plan specified — the same position the original 4/20 monolith run had moved.
+- **Lesson 1.0_8's V2 output** kept the multi-part Target Task as one task, not split into two.
+- **Lessons 1.0_1 and 1.0_3** both received `TDQ Target Task ELEM` specs and produced shapes that match each lesson's specified wording — not a uniform template applied across both. The pattern of "same label rendering four different ways" doesn't appear in this batch.
+- **The new "progression vs. required-question conflict" flag was raised on lesson 1.0_1's edit pass and waived** per the new carveout, rather than the question getting silently reordered. That's the new control working as designed.
 
 ---
 
