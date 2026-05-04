@@ -67,6 +67,7 @@ def extract_questions(activity_md: str) -> list:
             or "quick write" in tl
             or "extension question" in tl
             or "assessment" in tl
+            or "target task" in tl  # catches "Target Task Question N" headings
         )
 
     def flush_field():

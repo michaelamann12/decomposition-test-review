@@ -17,9 +17,9 @@ window.DATA = {
         "curriculum": "Bluebonnet",
         "grade": "Grade 5",
         "module": "Module 1",
-        "anchor_text": "Personal Narratives Reader: Shinpei Mykawa",
+        "anchor_text": "Text_Chapter 2 My Journey to Houston",
         "activity_type": "Close Read",
-        "objective": "Students will quote accurately from the text when identifying and describing personification.",
+        "objective": "Students will identify examples of personification and describe the human qualities used to bring nonhuman things to life.",
         "standard": "TEKS 5.7.C; TEKS 5.10.D",
         "generated_at": "2026-05-04",
         "build_label": "RERUN — May 4",
@@ -331,6 +331,26 @@ window.DATA = {
                 "A": "The narrator's face is a human body part, not a nonhuman thing — this confuses who is receiving the personification with who is doing it.",
                 "D": "While both the moisture and the sun are nonhuman things, \"feeling warm on a hot day\" is a literal description of weather, not a human quality attributed to a nonhuman thing — students selecting D are confusing a physical experience with a literary device."
               }
+            },
+            {
+              "title": "Target Task Question 1",
+              "type": "tdq",
+              "question": "Look at paragraph 9. In the sentence \"It was calling my name,\" what nonhuman thing is being personified?",
+              "criteria": "Student identifies the large plot of flat land as the nonhuman thing being personified in paragraph 9.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Target Task Question 2",
+              "type": "tdq",
+              "question": "In that same sentence from paragraph 9, what human quality is used to describe the nonhuman thing?",
+              "criteria": "Student identifies calling (or \"calling my name\") as the human quality — a human action — attributed to the nonhuman thing (the land).",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
             },
             {
               "title": "Extension",
@@ -660,7 +680,7 @@ window.DATA = {
         "curriculum": "Bluebonnet",
         "grade": "Grade 5",
         "module": "Module 1",
-        "anchor_text": "Personal Narratives Reader: Shinpei Mykawa",
+        "anchor_text": "Text_Chapter 1 Inspiration at the World's Fair",
         "activity_type": "Literal Comprehension",
         "objective": "Students will make and confirm predictions about \"Shinpei Mykawa\" using characteristics of personal narratives and text structures.",
         "standard": "TEKS 5.6.C",
@@ -899,6 +919,16 @@ window.DATA = {
               "distractor_rationales": {}
             },
             {
+              "title": "Target Task",
+              "type": "tdq",
+              "question": "What is the key idea of the last three paragraphs? Explain your answer.",
+              "criteria": "Student identifies that Shinpei learns Houston is right for farming, decides to pursue his plans there, and explains their answer.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
               "title": "Extension Question",
               "type": "extension",
               "question": "Shinpei almost didn't speak to the businessmen in paragraph (9). What do you think would have happened to his plans if he had walked away instead?",
@@ -987,6 +1017,16 @@ window.DATA = {
               "distractor_rationales": {}
             },
             {
+              "title": "Target Task",
+              "type": "correct question",
+              "question": "What is the key idea of the last three paragraphs? Explain your answer.",
+              "criteria": "Student infers that the key idea of the last three paragraphs is that Shinpei was correct in believing Texas to be the right location for his business, and supports this with evidence from paragraphs 8, 9, or 10.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
               "title": "Extension",
               "type": "extension",
               "question": "Shinpei pushed through his nerves to join a conversation with strangers at the World's Fair. What do you think makes someone willing to take a chance like that, even when it feels risky?",
@@ -1026,7 +1066,7 @@ window.DATA = {
         "curriculum": "Bluebonnet",
         "grade": "Grade 5",
         "module": "Module 1",
-        "anchor_text": "Personal Narratives Reader: Shinpei Mykawa",
+        "anchor_text": "Text_Chapter 3 My Rice Growing Project",
         "activity_type": "Close Read",
         "objective": "Students will use dialogue in \"Shinpei Mykawa\" to analyze characters and their relationships with one another.",
         "standard": "TEKS 5.8.B",
@@ -1385,6 +1425,47 @@ window.DATA = {
               "distractor_rationales": {}
             },
             {
+              "title": "Target Task — Part A",
+              "type": "mpchoice",
+              "question": "Which line of dialogue best shows the relationship between Mr. Mykawa and his colleagues?",
+              "criteria": "",
+              "options": [
+                {
+                  "letter": "A",
+                  "text": "\"We are eager to hear.\""
+                },
+                {
+                  "letter": "B",
+                  "text": "\"This all sounds like a wonderful opportunity, but what makes you think Japanese rice will be successful in America?\""
+                },
+                {
+                  "letter": "C",
+                  "text": "\"No need to explain any more. This sounds like a great business opportunity. We are ready to work hard in America.\""
+                },
+                {
+                  "letter": "D",
+                  "text": "\"Thank you for meeting with me today, gentlemen. I wanted to present you with an opportunity in America.\""
+                }
+              ],
+              "correct_letter": "C",
+              "correct_rationale": "Option C is correct. Kasoku Sawada's line \"No need to explain any more. This sounds like a great business opportunity. We are ready to work hard in America.\" best shows the relationship because it demonstrates the colleagues' complete trust and deference to Mr. Mykawa's judgment. They accept his plan without further objection, acknowledging they have heard enough. This is the clearest evidence of HIERARCHICAL SUPPORT — the colleagues trust Mr. Mykawa as the leader and initiator of the venture.",
+              "distractor_rationales": {
+                "A": "\"We are eager to hear\" shows readiness to listen but not the full nature of the relationship — it is a polite opening, not a demonstration of the colleagues' complete trust and deference to Mr. Mykawa's leadership. It comes before they've heard the plan.",
+                "B": "This line shows the colleagues raising a challenge or doubt, which might suggest conflict rather than the supportive, deferential relationship. While this shows they are engaged and asking questions, it does not best represent the overall relationship dynamic that emerges by the end of the scene.",
+                "D": "This is Mr. Mykawa's own line opening the meeting — it is his dialogue, not his colleagues'. It cannot show the relationship from the colleagues' side."
+              }
+            },
+            {
+              "title": "Target Task — Part B",
+              "type": "tdq",
+              "question": "The line of dialogue you chose in Part A describes the relationship between Mr. Mykawa and his colleagues. What does this dialogue show about their relationship?",
+              "criteria": "Student explains that the dialogue shows the colleagues fully trust Mr. Mykawa's leadership or judgment, or that they defer to his plan and are ready to follow his direction without further questions.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
               "title": "Extension",
               "type": "extension",
               "question": "Kasoku Sawada starts the meeting with caution and curiosity, but by the end he says \"No need to explain any more.\" What do you think makes someone change from doubtful to fully committed — is it the facts they hear, the person they're listening to, or something else?",
@@ -1424,7 +1505,7 @@ window.DATA = {
         "curriculum": "Bluebonnet",
         "grade": "Grade 5",
         "module": "Module 1",
-        "anchor_text": "Personal Narratives Reader: Shinpei Mykawa",
+        "anchor_text": "Text_Chapter 4 Becoming a Texas Landowner",
         "activity_type": "Close Read",
         "objective": "Students will analyze and describe a theme in \"Shinpei Mykawa.\"",
         "standard": "TEKS 5.6.G; TEKS 5.8.A",
@@ -1729,7 +1810,7 @@ window.DATA = {
         "curriculum": "Bluebonnet",
         "grade": "Grade 5",
         "module": "Module 1",
-        "anchor_text": "Personal Narratives Reader: Shinpei Mykawa",
+        "anchor_text": "Text_Chapter 5 My Success in America",
         "activity_type": "Writing: Short Response",
         "objective": "Students explain the purpose of \"Shinpei Mykawa,\" citing text evidence.",
         "standard": "TEKS 5.7.C; TEKS 5.10.A",
@@ -2262,6 +2343,26 @@ window.DATA = {
               "type": "tdq",
               "question": "Read the following sentence: \"That train rolled on all day long, to the song of the metal against the tracks, the blur of the towns and villages moving past my eyes.\" Does this sentence contain a metaphor or a simile? Identify the two things being compared and explain your answer.",
               "criteria": "Student identifies the sentence as a metaphor, names the two things being compared (the sound of the train on the tracks and a song), and explains that the comparison does not use \"like\" or \"as.\"",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Target Task Question 1",
+              "type": "lcq",
+              "question": "Does the following passage contain a metaphor or a simile?",
+              "criteria": "Student identifies the passage as containing a simile.",
+              "options": [],
+              "correct_letter": "",
+              "correct_rationale": "",
+              "distractor_rationales": {}
+            },
+            {
+              "title": "Target Task Question 2",
+              "type": "tdq",
+              "question": "How do you know this passage has a simile?",
+              "criteria": "Student explains that the passage is a simile because it uses the word \"like\" to compare the lights of Washington to the world being on fire, or identifies the two things being compared (city lights and fire).",
               "options": [],
               "correct_letter": "",
               "correct_rationale": "",
