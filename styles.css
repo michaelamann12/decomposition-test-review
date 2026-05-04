@@ -68,7 +68,6 @@ pre {
   grid-template-columns: 1fr auto;
   grid-template-areas:
     "lessons lessons"
-    "primary primary"
     "title nav";
   align-items: end;
   gap: 12px 24px;
@@ -788,13 +787,38 @@ details.checks-group .check-count {
   font-weight: 600;
 }
 
-/* When summary mode is active, de-emphasize the lesson-scoped UI */
-body.summary-mode .lesson-tabs,
+/* When summary mode is active, hide the lesson-scoped subtab strip + title
+   block (the lesson tabs themselves stay clickable so the user can switch
+   from the summary back into a lesson). */
 body.summary-mode .tabs,
 body.summary-mode .title-block {
-  opacity: 0.45;
-  pointer-events: none;
+  visibility: hidden;
 }
 body.summary-mode .footer {
   opacity: 0.6;
+}
+
+/* ---------- Executive Summary tab (sits in the lesson-tabs row) ---------- */
+.lesson-tab.lesson-tab-summary {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  border-color: #1e40af;
+  font-weight: 600;
+  margin-right: 8px;
+}
+.lesson-tab.lesson-tab-summary:hover {
+  background: linear-gradient(180deg, #1d4ed8 0%, #1e40af 100%);
+  color: #fff;
+}
+.lesson-tab.lesson-tab-summary .lt-eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+.lesson-tab.lesson-tab-summary.active {
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  color: #fff;
+  border-color: #1e3a8a;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+.lesson-tab.lesson-tab-summary.active .lt-eyebrow {
+  color: rgba(255, 255, 255, 0.85);
 }

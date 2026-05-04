@@ -24,13 +24,29 @@
   function renderLessonTabs() {
     const container = document.getElementById("lesson-tabs");
     container.innerHTML = "";
+
+    // Executive Summary tab — sits in the same strip as the lesson tabs but
+    // styled distinctly so it reads as a top-level "view-the-memo" entry.
+    const summaryActive = document.body.classList.contains("summary-mode");
+    const sumBtn = document.createElement("button");
+    sumBtn.className = "lesson-tab lesson-tab-summary" + (summaryActive ? " active" : "");
+    sumBtn.type = "button";
+    sumBtn.innerHTML =
+      `<span class="lt-eyebrow">Memo</span>` +
+      `<span class="lt-title">📋 Executive Summary</span>`;
+    sumBtn.addEventListener("click", () => {
+      showSummary(true);
+      renderLessonTabs();
+    });
+    container.appendChild(sumBtn);
+
     (D.lesson_order || Object.keys(D.lessons)).forEach((lid) => {
       const lesson = D.lessons[lid];
       const btn = document.createElement("button");
       const pillClass = lesson.meta.build_pill_class || "";
       btn.className =
         "lesson-tab" +
-        (lid === D.active_lesson_id ? " active" : "") +
+        (!summaryActive && lid === D.active_lesson_id ? " active" : "") +
         (pillClass ? " has-pill pill-" + pillClass : "");
       btn.dataset.lesson = lid;
       const pillHTML = lesson.meta.build_label
@@ -41,10 +57,15 @@
         `<span class="lt-title">${escapeHTML(lesson.meta.lesson_title || lid)}</span>` +
         pillHTML;
       btn.addEventListener("click", () => {
+        const wasSummary = document.body.classList.contains("summary-mode");
         showSummary(false);
         D.active_lesson_id = lid;
         renderLessonTabs();
         renderLesson();
+        if (wasSummary) {
+          // Visual jump: scroll back to top so the lesson view starts at its header
+          window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+        }
       });
       container.appendChild(btn);
     });
@@ -71,30 +92,19 @@
   function showSummary(on) {
     const body = document.body;
     const summaryView = document.getElementById("view-summary");
-    const navBtn = document.getElementById("nav-summary");
     if (on) {
       body.classList.add("summary-mode");
-      navBtn && navBtn.classList.add("active");
-      // Hide every lesson-scoped view, show summary
       document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
       if (summaryView) summaryView.classList.add("active");
-      // De-emphasize lesson tab strip + subtab strip via CSS .summary-mode
     } else {
       body.classList.remove("summary-mode");
-      navBtn && navBtn.classList.remove("active");
       if (summaryView) summaryView.classList.remove("active");
-      // Restore the currently-active subtab (or default to Question Comparison)
       const activeSubtab = document.querySelector(".tab.active") || document.querySelector(".tab");
       if (activeSubtab) {
         const target = document.getElementById("view-" + activeSubtab.dataset.tab);
         if (target) target.classList.add("active");
       }
     }
-  }
-  function attachPrimaryNavHandler() {
-    const btn = document.getElementById("nav-summary");
-    if (!btn) return;
-    btn.addEventListener("click", () => showSummary(true));
   }
 
   // ---------- Per-lesson rendering ----------
@@ -507,7 +517,6 @@
 
   // ---------- Init ----------
   attachSubTabHandlers();
-  attachPrimaryNavHandler();
   document.getElementById("comparison-mode").addEventListener("change", renderComparison);
   document.getElementById("hide-empty").addEventListener("change", renderComparison);
   if (!D.active_lesson_id || !D.lessons[D.active_lesson_id]) {
