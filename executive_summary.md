@@ -95,19 +95,11 @@ This batch was deliberately run *after* a round of fixes on Friday, May 1, that 
 
 ## Ask: recommended next steps
 
-**Before promoting V2 to live (estimate: ½ day total):**
+**Before promoting V2 to live:**
 
 1. Fix `populate-lesson` `VERIFIED_EXISTS` false-positive (BUG-001).
 2. Fix `--from=pick-excerpt` silent halt on reuse mode (BUG-002).
-3. Close the Avery / Friday fixes section above with re-verification evidence from this batch.
-
-**Before declaring the cross-curriculum path solid:**
-
-4. Run one Odell or AAL lesson end-to-end on V2.
-
-**Promote when 1 + 2 + 3 are verified via re-runs of the affected scenarios.** Item 4 can land in parallel.
-
-The diagnostic-quality manifest bugs (BUG-003, BUG-004) are not promotion blockers. They degrade debuggability but don't affect output.
+3. Move to adversarial review on this batch (as discussed with Codex and Claude).
 
 ---
 
