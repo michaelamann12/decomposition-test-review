@@ -27,9 +27,19 @@
     (D.lesson_order || Object.keys(D.lessons)).forEach((lid) => {
       const lesson = D.lessons[lid];
       const btn = document.createElement("button");
-      btn.className = "lesson-tab" + (lid === D.active_lesson_id ? " active" : "");
+      const pillClass = lesson.meta.build_pill_class || "";
+      btn.className =
+        "lesson-tab" +
+        (lid === D.active_lesson_id ? " active" : "") +
+        (pillClass ? " has-pill pill-" + pillClass : "");
       btn.dataset.lesson = lid;
-      btn.innerHTML = `<span class="lt-eyebrow">${escapeHTML(lesson.meta.curriculum)} ${escapeHTML(lesson.meta.grade)}</span><span class="lt-title">${escapeHTML(lesson.meta.lesson_title || lid)}</span>`;
+      const pillHTML = lesson.meta.build_label
+        ? `<span class="lt-pill pill-${escapeHTML(pillClass)}">${escapeHTML(lesson.meta.build_label)}</span>`
+        : "";
+      btn.innerHTML =
+        `<span class="lt-eyebrow">${escapeHTML(lesson.meta.curriculum)} ${escapeHTML(lesson.meta.grade)}</span>` +
+        `<span class="lt-title">${escapeHTML(lesson.meta.lesson_title || lid)}</span>` +
+        pillHTML;
       btn.addEventListener("click", () => {
         D.active_lesson_id = lid;
         renderLessonTabs();
@@ -435,6 +445,23 @@
     });
   }
 
+  // ---------- Executive Summary ----------
+  function renderExecutiveSummary() {
+    const summary = D.executive_summary;
+    const body = document.getElementById("exec-summary-body");
+    const status = document.getElementById("exec-summary-status");
+    if (!summary || !body) return;
+    if (status) {
+      const verdictClass = summary.verdict_status || "";
+      status.innerHTML =
+        `<div class="exec-summary-meta">` +
+          `<span class="exec-verdict-badge verdict-${escapeHTML(verdictClass)}">${escapeHTML(summary.verdict_label || "")}</span>` +
+          `<span class="exec-meta-line">As of <strong>${escapeHTML(summary.as_of || "")}</strong> · Sample: <strong>${escapeHTML(summary.sample_size || "")}</strong></span>` +
+        `</div>`;
+    }
+    body.innerHTML = md(summary.markdown || "");
+  }
+
   // ---------- Render dispatch ----------
   function renderLesson() {
     renderHeader();
@@ -455,4 +482,5 @@
   renderLessonTabs();
   renderLesson();
   renderChecks();
+  renderExecutiveSummary();
 })();
