@@ -41,6 +41,7 @@
         `<span class="lt-title">${escapeHTML(lesson.meta.lesson_title || lid)}</span>` +
         pillHTML;
       btn.addEventListener("click", () => {
+        showSummary(false);
         D.active_lesson_id = lid;
         renderLessonTabs();
         renderLesson();
@@ -55,6 +56,8 @@
     const views = document.querySelectorAll(".view");
     tabs.forEach((t) => {
       t.addEventListener("click", () => {
+        // Clicking any lesson-scoped subtab implies leaving summary mode
+        showSummary(false);
         tabs.forEach((x) => x.classList.remove("active"));
         views.forEach((v) => v.classList.remove("active"));
         t.classList.add("active");
@@ -62,6 +65,36 @@
         if (target) target.classList.add("active");
       });
     });
+  }
+
+  // ---------- Top-level Executive Summary toggle ----------
+  function showSummary(on) {
+    const body = document.body;
+    const summaryView = document.getElementById("view-summary");
+    const navBtn = document.getElementById("nav-summary");
+    if (on) {
+      body.classList.add("summary-mode");
+      navBtn && navBtn.classList.add("active");
+      // Hide every lesson-scoped view, show summary
+      document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+      if (summaryView) summaryView.classList.add("active");
+      // De-emphasize lesson tab strip + subtab strip via CSS .summary-mode
+    } else {
+      body.classList.remove("summary-mode");
+      navBtn && navBtn.classList.remove("active");
+      if (summaryView) summaryView.classList.remove("active");
+      // Restore the currently-active subtab (or default to Question Comparison)
+      const activeSubtab = document.querySelector(".tab.active") || document.querySelector(".tab");
+      if (activeSubtab) {
+        const target = document.getElementById("view-" + activeSubtab.dataset.tab);
+        if (target) target.classList.add("active");
+      }
+    }
+  }
+  function attachPrimaryNavHandler() {
+    const btn = document.getElementById("nav-summary");
+    if (!btn) return;
+    btn.addEventListener("click", () => showSummary(true));
   }
 
   // ---------- Per-lesson rendering ----------
@@ -474,6 +507,7 @@
 
   // ---------- Init ----------
   attachSubTabHandlers();
+  attachPrimaryNavHandler();
   document.getElementById("comparison-mode").addEventListener("change", renderComparison);
   document.getElementById("hide-empty").addEventListener("change", renderComparison);
   if (!D.active_lesson_id || !D.lessons[D.active_lesson_id]) {

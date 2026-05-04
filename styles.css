@@ -725,3 +725,67 @@ details.checks-group .check-count {
 .exec-summary-wrap .markdown-body table td {
   padding: 6px 10px;
 }
+
+/* ---------- Primary nav (Executive Summary as top-level entry point) ---------- */
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 6px 0;
+  margin-bottom: 4px;
+}
+.primary-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 2px rgba(30, 58, 138, 0.18);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+.primary-nav-btn:hover {
+  background: linear-gradient(180deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 2px 6px rgba(30, 58, 138, 0.25);
+}
+.primary-nav-btn:active {
+  transform: translateY(1px);
+}
+.primary-nav-btn.active {
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+.primary-nav-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.primary-nav-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+}
+.primary-nav-label {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+/* When summary mode is active, de-emphasize the lesson-scoped UI */
+body.summary-mode .lesson-tabs,
+body.summary-mode .tabs,
+body.summary-mode .title-block {
+  opacity: 0.45;
+  pointer-events: none;
+}
+body.summary-mode .footer {
+  opacity: 0.6;
+}
