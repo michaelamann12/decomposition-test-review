@@ -28,7 +28,7 @@ HOME = Path(os.environ["HOME"])
 GDRIVE = HOME / "Library/CloudStorage/GoogleDrive-michaela.mann@coursemojo.com"
 CLONE = GDRIVE / "My Drive/project-clone"
 
-MP_CSV = CLONE / "module_plans/Bluebonnet/G5/TX_BBO_XX_G5_M1 Unit Overview - Personal Narratives.csv"
+MP_CSV = CLONE / "module_plans/Bluebonnet/G5/TX_BBO_XX_G5_M1 Unit Overviews - 1 Personal Narratives.csv"
 
 LIVE_DRIVE = GDRIVE / "Shared drives/2026-27 Activity Creation"
 
@@ -38,12 +38,15 @@ LIVE_DRIVE = GDRIVE / "Shared drives/2026-27 Activity Creation"
 # monolith snapshot in _DO_NOT_EDIT/) and v3 (top-level contractor edit + Review_Summary.md).
 # Set review_ready_folder_name to "" if no review history exists for that lesson.
 LESSONS = [
-    ("TX_BBO_XX_G5_1.0_1_v1", "2026-05-01_TX_BBO_XX_G5_1.0_1_v1_r3", "2026-04-20_TX_BBO_XX_G5_1.0_1_v1", "BUILD — May 1", "build", "2026-05-01"),
-    ("TX_BBO_XX_G5_1.0_2_v1", "2026-05-04_TX_BBO_XX_G5_1.0_2_v1",    "",                                  "RERUN — May 4", "rerun", "2026-05-04"),  # v2/v3 already in dashboard
-    ("TX_BBO_XX_G5_1.0_3_v1", "2026-05-01_TX_BBO_XX_G5_1.0_3_v1",    "2026-04-20_TX_BBO_XX_G5_1.0_3_v1", "RERUN — May 4", "rerun", "2026-05-04"),
-    ("TX_BBO_XX_G5_1.0_4_v1", "2026-05-01_TX_BBO_XX_G5_1.0_4_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_4_v1", "RERUN — May 4", "rerun", "2026-05-04"),
-    ("TX_BBO_XX_G5_1.0_5_v1", "2026-05-01_TX_BBO_XX_G5_1.0_5_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_5_v1", "BUILD — May 1", "build", "2026-05-01"),
-    ("TX_BBO_XX_G5_1.0_8_v1", "2026-05-01_TX_BBO_XX_G5_1.0_8_v1",    "2026-04-21_TX_BBO_XX_G5_1.0_8_v1", "RERUN — May 4", "rerun", "2026-05-04"),
+    # Updated 2026-05-05: 5 of 6 lessons re-ran today through the rebuilt Python orchestrator
+    # (post BUG-012/013/014 fixes). 1.0_3 was last verified 2026-05-04 under the prior orchestrator;
+    # not re-run today (out of scope for the day's bug-affected batch: 1.0_2, 1.0_4, 1.0_5, 1.0_8 + 1.0_1 control).
+    ("TX_BBO_XX_G5_1.0_1_v1", "2026-05-05_TX_BBO_XX_G5_1.0_1_v1", "2026-04-20_TX_BBO_XX_G5_1.0_1_v1", "RERUN — May 5", "rerun", "2026-05-05"),
+    ("TX_BBO_XX_G5_1.0_2_v1", "2026-05-05_TX_BBO_XX_G5_1.0_2_v1", "",                                  "RERUN — May 5", "rerun", "2026-05-05"),  # v2/v3 already in dashboard
+    ("TX_BBO_XX_G5_1.0_3_v1", "2026-05-04_TX_BBO_XX_G5_1.0_3_v1", "2026-04-20_TX_BBO_XX_G5_1.0_3_v1", "RERUN — May 4", "rerun", "2026-05-04"),
+    ("TX_BBO_XX_G5_1.0_4_v1", "2026-05-05_TX_BBO_XX_G5_1.0_4_v1", "2026-04-21_TX_BBO_XX_G5_1.0_4_v1", "RERUN — May 5", "rerun", "2026-05-05"),
+    ("TX_BBO_XX_G5_1.0_5_v1", "2026-05-05_TX_BBO_XX_G5_1.0_5_v1", "2026-04-21_TX_BBO_XX_G5_1.0_5_v1", "RERUN — May 5", "rerun", "2026-05-05"),
+    ("TX_BBO_XX_G5_1.0_8_v1", "2026-05-05_TX_BBO_XX_G5_1.0_8_v1", "2026-04-21_TX_BBO_XX_G5_1.0_8_v1", "RERUN — May 5", "rerun", "2026-05-05"),
 ]
 
 
