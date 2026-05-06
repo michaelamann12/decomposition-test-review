@@ -580,9 +580,62 @@
     body.innerHTML = md(summary.markdown || "");
   }
 
+  // ---------- Known-issue overlay ----------
+  // Per-lesson notes layered onto the dashboard from outside the data.js
+  // build pipeline. Survives data.js regenerations because it lives in the
+  // app code, not the build output. Keyed by lesson_id.
+  const KNOWN_ISSUES = {
+    "TX_BBO_XX_G5_1.0_2_v1": {
+      tag: "BUG-016",
+      severity: "Medium-High",
+      title: "V2 silently consolidated DQ4+DQ5 into Target Task slots",
+      body:
+        "The module plan specified 5 driving questions (1 verbatim + 4 outline) plus a 2-question Target Task. " +
+        "V2 produced only 4 DQs and 2 TT questions — outline DQs 4 and 5 (the 'separate example of personification' " +
+        "questions) were silently consolidated into the TT, and an LCQ filler ('What does the narrator discover " +
+        "about the land in paragraph 9?') was invented to fill the gap. The contractor-corrected version (V3) shows " +
+        "what the plan was actually asking for: 5 DQs + 2 TT questions, no consolidation.",
+      fix_status: "Fix design identified — parked for implementation",
+      fix_summary:
+        "Three-layer outline-atomicity fix: (1) deterministic outline-count parser with marker-phrase " +
+        "constraint extraction in extract-requirements; (2) post-render validate + 1 auto-regen on count or " +
+        "marker-distinctness mismatch in generate-activity; (3) always-on Match Report flag visible at top " +
+        "of report. Pipeline never halts on outline issues — best-effort output ships with prominent reviewer flag. " +
+        "Sibling architectural gap to BUG-015 (outline-quote fabrication path).",
+      reference: "See BUGS.md → BUG-016 for full investigation log, real-data scan results, " +
+                 "Codex reviews, and 3-layer design.",
+    },
+  };
+
+  function renderKnownIssueBanner() {
+    const banner = document.getElementById("known-issue-banner");
+    if (!banner) return;
+    const issue = KNOWN_ISSUES[D.active_lesson_id];
+    if (!issue) {
+      banner.style.display = "none";
+      banner.innerHTML = "";
+      return;
+    }
+    banner.style.display = "";
+    banner.innerHTML = `
+      <div class="known-issue-header">
+        <span class="known-issue-tag">${escapeHTML(issue.tag)}</span>
+        <span class="known-issue-severity">${escapeHTML(issue.severity)}</span>
+        <span class="known-issue-status">${escapeHTML(issue.fix_status)}</span>
+      </div>
+      <h3 class="known-issue-title">${escapeHTML(issue.title)}</h3>
+      <p class="known-issue-body">${escapeHTML(issue.body)}</p>
+      <div class="known-issue-fix">
+        <strong>Proposed fix:</strong> ${escapeHTML(issue.fix_summary)}
+      </div>
+      <div class="known-issue-ref">${escapeHTML(issue.reference)}</div>
+    `;
+  }
+
   // ---------- Render dispatch ----------
   function renderLesson() {
     renderHeader();
+    renderKnownIssueBanner();
     renderModulePlanPanel();
     renderReviewSummaryPanel();
     renderComparison();
