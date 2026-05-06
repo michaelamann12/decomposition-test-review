@@ -322,10 +322,12 @@
   }
 
   // Renders a small "missing"/"extra"/"deviation" indicator when the build-time
-  // matcher flagged a row.
+  // matcher flagged a row. Internal flag keys still reference "v4" (the column
+  // key in data.js) but user-facing text refers to "V2" (the pipeline name shown
+  // to reviewers in the column header).
   function flagBadge(flag) {
-    if (flag === "missing_in_v4") return `<div class="flag flag-missing">🚩 MISSING — Claude did not implement this plan instruction in v4</div>`;
-    if (flag === "verbatim_deviation_v4") return `<div class="flag flag-deviation">🚩 VERBATIM DEVIATION — Claude's v4 wording differs from the required verbatim</div>`;
+    if (flag === "missing_in_v4") return `<div class="flag flag-missing">🚩 MISSING — Claude did not implement this plan instruction in V2</div>`;
+    if (flag === "verbatim_deviation_v4") return `<div class="flag flag-deviation">🚩 VERBATIM DEVIATION — Claude's V2 wording differs from the required verbatim</div>`;
     if (flag === "extra_in_v4") return `<div class="flag flag-extra">🚩 EXTRA — Claude added this question; not in module plan</div>`;
     return "";
   }
