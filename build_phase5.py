@@ -236,6 +236,158 @@ def build_executive_summary() -> dict:
     }
 
 
+# ---------------------------------------------------------------------------
+# Per-question module-plan-fidelity comparison
+# ---------------------------------------------------------------------------
+# For each lesson, build a `comparison_rows` array driven by the module plan.
+# Each row pairs ONE plan instruction with the v2/v3/v4 questions that
+# implement it. This lets reviewers see "did Claude listen to the author?"
+# row-by-row, with explicit labels distinguishing:
+#   - Verbatim (Claude must use exact wording)
+#   - Outline  (Claude has latitude on phrasing, judges intent)
+#   - Discretion (no plan instruction — Claude invented)
+#
+# Matching rules in priority order:
+#   1. Verbatim DQ → exact-string match against question stems (normalized).
+#      Locks regardless of position. Robust to Claude reordering for flow.
+#   2. Outline DQ → positional within remaining unmatched driving slots.
+#   3. Target Task → section match (questions tagged "Target Task ..." or
+#      "Assessment ...") + order.
+#   4. Extension → section match.
+#
+# Unmatched questions in v2/v3/v4 are emitted as "extra" rows with a
+# discretion plan_instruction, so reviewers can see Claude added these.
+# ---------------------------------------------------------------------------
+
+def _normalize_for_match(s: str) -> str:
+    """Lowercase, collapse whitespace, strip punctuation — for fuzzy equality."""
+    if not s:
+        return ""
+    s = s.strip().lower()
+    s = re.sub(r"\s+", " ", s)
+    s = re.sub(r"[^\w\s]", "", s)
+    return s
+
+
+def _split_lines(s: str) -> list[str]:
+    return [line.strip() for line in (s or "").split("\n") if line.strip()]
+
+
+def parse_module_plan_instructions(mp: dict) -> list[dict]:
+    """Parse a lesson's module_plan dict into ordered plan instructions."""
+    instructions = []
+    for line in _split_lines(mp.get("driving_questions_verbatim", "")):
+        instructions.append({"role": "driving", "source": "verbatim", "text": line})
+    for line in _split_lines(mp.get("driving_questions_outline", "")):
+        instructions.append({"role": "driving", "source": "outline", "text": line})
+    tt_v = (mp.get("target_task_verbatim") or "").strip()
+    tt_o = (mp.get("target_task_outline") or "").strip()
+    tt_fmt = (mp.get("tt_format_type") or "").strip()
+    if tt_v:
+        instructions.append({"role": "target_task", "source": "verbatim", "text": tt_v, "format": tt_fmt})
+    elif tt_o:
+        instructions.append({"role": "target_task", "source": "outline", "text": tt_o, "format": tt_fmt})
+    return instructions
+
+
+def role_of_question(q: dict) -> str:
+    """Infer role (driving/target_task/extension) from a question's title."""
+    title = (q.get("title") or "").lower()
+    if "target task" in title or "assessment" in title or "claim question" in title:
+        return "target_task"
+    if "extension" in title or "short write" in title or "quick write" in title:
+        return "extension"
+    return "driving"
+
+
+def match_instruction(inst: dict, questions: list, used: set) -> int | None:
+    """Return the best-match index in `questions` for this plan instruction.
+
+    Verbatim: exact-string match (normalized) against question stems.
+    Outline / target_task: positional within unmatched questions of the right role.
+    """
+    role = inst["role"]
+    candidates = [(i, q) for i, q in enumerate(questions) if i not in used and role_of_question(q) == role]
+    if not candidates:
+        return None
+    if inst["source"] == "verbatim":
+        norm_inst = _normalize_for_match(inst["text"])
+        for i, q in candidates:
+            if _normalize_for_match(q.get("question", "")) == norm_inst:
+                return i
+        # No exact match — fall through to first available so reviewer sees the deviation
+    return candidates[0][0]
+
+
+def compute_comparison_rows(lesson: dict) -> list[dict]:
+    """Build the ordered list of comparison rows for this lesson."""
+    mp = lesson.get("module_plan", {})
+    versions = lesson.get("versions", {})
+    v2 = versions.get("v2_original", {}).get("questions") or []
+    v3 = versions.get("v3_review", {}).get("questions") or []
+    v4 = versions.get("v4_current", {}).get("questions") or []
+
+    instructions = parse_module_plan_instructions(mp)
+    used_v2: set = set()
+    used_v3: set = set()
+    used_v4: set = set()
+    rows: list[dict] = []
+
+    for inst in instructions:
+        i_v2 = match_instruction(inst, v2, used_v2)
+        i_v3 = match_instruction(inst, v3, used_v3)
+        i_v4 = match_instruction(inst, v4, used_v4)
+        if i_v2 is not None: used_v2.add(i_v2)
+        if i_v3 is not None: used_v3.add(i_v3)
+        if i_v4 is not None: used_v4.add(i_v4)
+
+        flags = []
+        if i_v4 is None:
+            flags.append("missing_in_v4")
+        elif inst["source"] == "verbatim":
+            if _normalize_for_match(v4[i_v4].get("question", "")) != _normalize_for_match(inst["text"]):
+                flags.append("verbatim_deviation_v4")
+
+        rows.append({
+            "plan_instruction": inst,
+            "v2_question": v2[i_v2] if i_v2 is not None else None,
+            "v3_question": v3[i_v3] if i_v3 is not None else None,
+            "v4_question": v4[i_v4] if i_v4 is not None else None,
+            "flags": flags,
+        })
+
+    # Add "discretion" rows for v4 questions with no matching plan instruction.
+    # These are usually extensions (legitimate author discretion) or rare cases
+    # where Claude added an unspecified question (flagged as "extra_in_v4").
+    for i, q in enumerate(v4):
+        if i in used_v4:
+            continue
+        role = role_of_question(q)
+        # Pair with positionally-aligned v2/v3 of same role if available
+        i_v2 = next((j for j, qq in enumerate(v2)
+                     if j not in used_v2 and role_of_question(qq) == role), None)
+        i_v3 = next((j for j, qq in enumerate(v3)
+                     if j not in used_v3 and role_of_question(qq) == role), None)
+        if i_v2 is not None: used_v2.add(i_v2)
+        if i_v3 is not None: used_v3.add(i_v3)
+        flags = []
+        if role != "extension":
+            flags.append("extra_in_v4")  # Claude added an unspecified driving / target task Q
+        rows.append({
+            "plan_instruction": {
+                "role": role,
+                "source": "discretion",
+                "text": "" if role == "extension" else "(no module plan instruction for this question)",
+            },
+            "v2_question": v2[i_v2] if i_v2 is not None else None,
+            "v3_question": v3[i_v3] if i_v3 is not None else None,
+            "v4_question": q,
+            "flags": flags,
+        })
+
+    return rows
+
+
 def main() -> None:
     existing = load_existing_data_js()
 
@@ -274,6 +426,11 @@ def main() -> None:
             if not ver:
                 continue
             ver["questions"] = extract_questions(ver.get("activity_md") or "")
+
+    # Compute per-question module-plan-fidelity comparison rows for every lesson.
+    # See compute_comparison_rows() docstring for matching rules.
+    for lid, lesson in out["lessons"].items():
+        lesson["comparison_rows"] = compute_comparison_rows(lesson)
 
     out["executive_summary"] = build_executive_summary()
 

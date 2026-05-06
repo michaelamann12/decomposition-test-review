@@ -185,6 +185,20 @@
 
   function buildRows() {
     const L = activeLesson();
+    // Prefer the build-time comparison_rows (deterministic v1↔v2/v3/v4 matching with
+    // verbatim/outline/discretion source labels). Falls back to the legacy positional
+    // builder for any older data.js shape that doesn't have comparison_rows yet.
+    if (Array.isArray(L.comparison_rows) && L.comparison_rows.length) {
+      return L.comparison_rows.map((r, i) => ({
+        idx: i,
+        v1: r.plan_instruction || null,         // {role, source, text, format?}
+        v2: r.v2_question || null,
+        v3: r.v3_question || null,
+        v4: r.v4_question || null,
+        flags: r.flags || [],
+      }));
+    }
+    // --- Legacy fallback (positional alignment, no source labels) ---
     const v2 = L.versions.v2_original.questions || [];
     const v3 = L.versions.v3_review.questions || [];
     const v4 = L.versions.v4_current.questions || [];
@@ -199,6 +213,7 @@
         v2: v2[i] || null,
         v3: v3[i] || null,
         v4: v4[i] || null,
+        flags: [],
       });
     }
     return rows;
@@ -217,7 +232,7 @@
       if (hideEmpty && cols.every((k) => !r[k])) return;
       html += `<div class="qrow" style="grid-template-columns: 60px repeat(${colCount}, 1fr);">`;
       html += `<div class="row-label">Q${r.idx + 1}</div>`;
-      cols.forEach((k) => { html += cellHtml(r[k], k); });
+      cols.forEach((k) => { html += cellHtml(r[k], k, r.flags); });
       html += `</div>`;
     });
     return html;
@@ -258,13 +273,61 @@
     return html;
   }
 
-  function cellHtml(q, vKey) {
-    if (!q) return `<div class="qcell empty col-${vKey}">—</div>`;
+  function cellHtml(q, vKey, flags) {
+    if (vKey === "v1") return v1CellHtml(q, flags || []);
+    const myFlags = (flags || []).filter(f => f.endsWith(`_${vKey}`));
+    if (!q) {
+      const flagBadges = myFlags.map(flagBadge).join("");
+      return `<div class="qcell empty col-${vKey}">${flagBadges || "—"}</div>`;
+    }
+    const flagBadges = myFlags.map(flagBadge).join("");
     return `<div class="qcell col-${vKey}">
       <div class="qtitle">${escapeHTML(q.title || "")}</div>
       ${q.type ? `<div class="qtype-badge">${escapeHTML(q.type)}</div>` : ""}
+      ${flagBadges}
       ${renderQuestionBody(q)}
     </div>`;
+  }
+
+  // v1 cell renders the module-plan instruction with a source badge + reviewer hint.
+  // Source values: "verbatim" (Claude must use exact wording), "outline" (Claude
+  // interprets intent), "discretion" (no plan instruction — Claude invented).
+  function v1CellHtml(plan, flags) {
+    if (!plan) return `<div class="qcell empty col-v1">—</div>`;
+    const source = (plan.source || "discretion").toLowerCase();
+    const role = (plan.role || "").replace("_", " ");
+    let badgeText, hintText;
+    if (source === "verbatim") {
+      badgeText = "VERBATIM REQUIRED";
+      hintText = "Wording must match exactly. Any phrasing change is a fidelity violation.";
+    } else if (source === "outline") {
+      badgeText = "OUTLINE SUGGESTED";
+      hintText = "Plan suggested intent. Claude chose specific wording — assess whether the chosen phrasing achieves the suggested intent.";
+    } else {
+      badgeText = "AUTHOR DISCRETION";
+      hintText = "Plan didn't specify. Claude invented this — assess pedagogical fit.";
+    }
+    const flagBadges = (flags || []).map(flagBadge).join("");
+    const text = plan.text || (source === "discretion" ? "(no module plan instruction for this question)" : "");
+    return `<div class="qcell col-v1 plan-${source}">
+      <div class="plan-badges">
+        <span class="plan-badge badge-${source}">${badgeText}</span>
+        ${role ? `<span class="plan-role">${escapeHTML(role)}</span>` : ""}
+      </div>
+      ${flagBadges}
+      <div class="qstem plan-text">${escapeHTML(text)}</div>
+      ${plan.format ? `<div class="plan-format">Format: ${escapeHTML(plan.format)}</div>` : ""}
+      <div class="plan-hint">${escapeHTML(hintText)}</div>
+    </div>`;
+  }
+
+  // Renders a small "missing"/"extra"/"deviation" indicator when the build-time
+  // matcher flagged a row.
+  function flagBadge(flag) {
+    if (flag === "missing_in_v4") return `<div class="flag flag-missing">🚩 MISSING — Claude did not implement this plan instruction in v4</div>`;
+    if (flag === "verbatim_deviation_v4") return `<div class="flag flag-deviation">🚩 VERBATIM DEVIATION — Claude's v4 wording differs from the required verbatim</div>`;
+    if (flag === "extra_in_v4") return `<div class="flag flag-extra">🚩 EXTRA — Claude added this question; not in module plan</div>`;
+    return "";
   }
 
   function renderStacked(rows, hideEmpty, cols) {
@@ -273,24 +336,34 @@
     rows.forEach((r) => {
       if (hideEmpty && cols.every((k) => !r[k])) return;
       html += `<div class="stacked-question"><h3>Q${r.idx + 1}</h3><div class="stacked-versions">`;
-      cols.forEach((k) => { html += stackedRow(L, k, r[k]); });
+      cols.forEach((k) => { html += stackedRow(L, k, r[k], r.flags); });
       html += `</div></div>`;
     });
     return html;
   }
 
-  function stackedRow(L, vKey, q) {
+  function stackedRow(L, vKey, q, flags) {
     const label = L.version_labels[vKey];
     const subtitle = L.version_subtitles[vKey];
+    if (vKey === "v1") {
+      // Plan-instruction cell — use the same renderer as side-by-side, with the
+      // version label/subtitle wrapper.
+      return `<div class="stacked-version ${vKey}">
+        <div class="v-label">${escapeHTML(label)}<div class="vsub">${escapeHTML(subtitle)}</div></div>
+        <div class="v-content">${v1CellHtml(q, flags || []).replace(/^<div class="qcell[^"]*">/, "").replace(/<\/div>$/, "")}</div>
+      </div>`;
+    }
     if (!q) {
       return `<div class="stacked-version ${vKey}">
         <div class="v-label">${escapeHTML(label)}<div class="vsub">${escapeHTML(subtitle)}</div></div>
         <div class="v-content"><span class="empty">— no question at this position —</span></div>
       </div>`;
     }
+    const flagBadges = (flags || []).filter(f => f.endsWith(`_${vKey}`)).map(flagBadge).join("");
     let content = "";
     if (q.title) content += `<div class="qtitle">${escapeHTML(q.title)}</div>`;
     if (q.type) content += `<div class="qtype-badge">${escapeHTML(q.type)}</div>`;
+    content += flagBadges;
     content += renderQuestionBody(q);
     return `<div class="stacked-version ${vKey}">
       <div class="v-label">${escapeHTML(label)}<div class="vsub">${escapeHTML(subtitle)}</div></div>

@@ -822,3 +822,115 @@ body.summary-mode .footer {
 .lesson-tab.lesson-tab-summary.active .lt-eyebrow {
   color: rgba(255, 255, 255, 0.85);
 }
+
+/* ============================================================ */
+/* Module-plan fidelity — v1 cell badges + flags (added 2026-05-06)
+   Reviewers use these to see "did Claude listen to the author?"
+   - Verbatim required (orange):   Claude must use exact wording
+   - Outline suggested (blue):     Claude interprets intent
+   - Author discretion (gray):     no plan instruction; Claude invented
+   - Flags (red):                  missing/extra/deviation surfaced from build-time matching
+   ============================================================ */
+
+.qcell.col-v1 .plan-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.plan-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge-verbatim {
+  background: #fed7aa;     /* orange-200 */
+  color: #9a3412;          /* orange-800 */
+  border: 1px solid #fb923c;
+}
+.badge-outline {
+  background: #dbeafe;     /* blue-200 */
+  color: #1e3a8a;          /* blue-900 */
+  border: 1px solid #60a5fa;
+}
+.badge-discretion {
+  background: #f3f4f6;     /* gray-100 */
+  color: #4b5563;          /* gray-600 */
+  border: 1px solid #d1d5db;
+}
+.plan-role {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #f9fafb;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+.qcell.col-v1.plan-discretion .plan-text {
+  font-style: italic;
+  color: #6b7280;
+}
+.qcell.col-v1 .plan-text {
+  margin: 4px 0;
+}
+.plan-format {
+  font-size: 0.78em;
+  color: #6b7280;
+  margin: 4px 0;
+  font-style: italic;
+}
+.plan-hint {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border-left: 3px solid #d1d5db;
+  font-size: 0.78em;
+  line-height: 1.4;
+  color: #4b5563;
+  border-radius: 0 3px 3px 0;
+}
+.qcell.col-v1.plan-verbatim .plan-hint {
+  border-left-color: #fb923c;
+  background: rgba(251, 146, 60, 0.06);
+}
+.qcell.col-v1.plan-outline .plan-hint {
+  border-left-color: #60a5fa;
+  background: rgba(96, 165, 250, 0.06);
+}
+.qcell.col-v1.plan-discretion .plan-hint {
+  border-left-color: #9ca3af;
+}
+
+/* Flags — visible on any version cell */
+.flag {
+  display: block;
+  padding: 4px 8px;
+  margin: 4px 0;
+  border-radius: 3px;
+  font-size: 0.78em;
+  font-weight: 600;
+}
+.flag-missing {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 3px solid #dc2626;
+}
+.flag-deviation {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 3px solid #f59e0b;
+}
+.flag-extra {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 3px solid #f59e0b;
+}
