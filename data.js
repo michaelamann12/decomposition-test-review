@@ -432,9 +432,7 @@ window.DATA = {
             "correct_rationale": "",
             "distractor_rationales": {}
           },
-          "flags": [
-            "verbatim_deviation_v4"
-          ]
+          "flags": []
         },
         {
           "plan_instruction": {
@@ -2525,14 +2523,35 @@ window.DATA = {
             "text": "Question 4. Based on the dialogue between the main character and his wife, what can the reader infer about their relationship?"
           },
           "v2_question": {
-            "title": "Question 1",
-            "type": "tdq",
-            "question": "What details does Mr. Mykawa show through the following line of dialogue? \"I hear Texas is a wonderful place for growing crops. Would you concur?\"",
-            "criteria": "Student identifies details that the dialogue reveals about Mr. Mykawa's character — for example, that he is curious, information-seeking, or strategic in how he approaches learning about Texas farming.",
-            "options": [],
-            "correct_letter": "",
-            "correct_rationale": "",
-            "distractor_rationales": {}
+            "title": "Question 4",
+            "type": "mpchoice",
+            "question": "Based on the dialogue between the main character and his wife, what can the reader infer about their relationship?",
+            "criteria": "",
+            "options": [
+              {
+                "letter": "A",
+                "text": "The main character's wife trusts him and supports his ideas."
+              },
+              {
+                "letter": "B",
+                "text": "The main character is a dreamer, and his wife thinks he is foolish."
+              },
+              {
+                "letter": "C",
+                "text": "The main character is bossy and makes all the decisions for his wife."
+              },
+              {
+                "letter": "D",
+                "text": "The main character's wife doesn't believe he is a good businessman."
+              }
+            ],
+            "correct_letter": "A",
+            "correct_rationale": "Option A is correct. The wife says \"I trust you, and I'm ready to see all that America has to offer\" in paragraph (3), which directly states her trust. Even when she raises a concern about convincing others in paragraph (5), she frames it within a compliment: \"You are an excellent farmer and a wonderful businessman.\" Together, the dialogue shows she supports his vision while gently advising caution — a relationship built on trust.",
+            "distractor_rationales": {
+              "B": "Students may focus on the wife's concern in paragraph (5) about convincing others, and read that as doubt about the narrator's judgment — but her words explicitly affirm his strengths (\"You are an excellent farmer and a wonderful businessman\") before raising a practical challenge, which is support, not dismissal.",
+              "C": "Students may notice that the narrator announces the decision immediately and gives no room for his wife to object — but the wife's tone throughout is trusting, not reluctant, and she never expresses resentment or loss of agency.",
+              "D": "Students may extract the wife's warning about convincing others and interpret it as doubt about the narrator's business ability — but she explicitly says \"You are an excellent farmer and a wonderful businessman,\" which contradicts this inference."
+            }
           },
           "v3_question": {
             "title": "Question 1",
@@ -2584,10 +2603,10 @@ window.DATA = {
             "text": "a. The main character's wife trusts him and supports his ideas."
           },
           "v2_question": {
-            "title": "Question 2",
+            "title": "Question 1",
             "type": "tdq",
-            "question": "What does the following line of dialogue show that the businessmen concluded about Mr. Mykawa? \"Finally, one man responded, 'Actually, Texas is a fine place for farming, specifically Houston, Texas. Have you been?'\"",
-            "criteria": "Student identifies that the businessmen's dialogue shows they found Mr. Mykawa worth engaging — they responded to him seriously and offered useful information, suggesting they concluded he was knowledgeable or credible.",
+            "question": "What details does Mr. Mykawa show through the following line of dialogue? \"I hear Texas is a wonderful place for growing crops. Would you concur?\"",
+            "criteria": "Student identifies details that the dialogue reveals about Mr. Mykawa's character — for example, that he is curious, information-seeking, or strategic in how he approaches learning about Texas farming.",
             "options": [],
             "correct_letter": "",
             "correct_rationale": "",
@@ -2624,10 +2643,10 @@ window.DATA = {
             "text": "b. The main character is a dreamer, and his wife thinks he is foolish."
           },
           "v2_question": {
-            "title": "Question 3",
+            "title": "Question 2",
             "type": "tdq",
-            "question": "What does this line of dialogue show about Mr. Mykawa's opinion on farming? \"Have I been to Texas? No! But what a phenomenal suggestion! 'Please tell me more about Houston and how to get there,' I said.\"",
-            "criteria": "Student identifies that the dialogue shows Mr. Mykawa is enthusiastic and open-minded about farming opportunities — he is immediately excited by the suggestion and eager to learn more.",
+            "question": "What does the following line of dialogue show that the businessmen concluded about Mr. Mykawa? \"Finally, one man responded, 'Actually, Texas is a fine place for farming, specifically Houston, Texas. Have you been?'\"",
+            "criteria": "Student identifies that the businessmen's dialogue shows they found Mr. Mykawa worth engaging — they responded to him seriously and offered useful information, suggesting they concluded he was knowledgeable or credible.",
             "options": [],
             "correct_letter": "",
             "correct_rationale": "",
@@ -2664,35 +2683,14 @@ window.DATA = {
             "text": "c. The main character is bossy and makes all the decisions for his wife."
           },
           "v2_question": {
-            "title": "Question 4",
-            "type": "mpchoice",
-            "question": "Based on the dialogue between the main character and his wife, what can the reader infer about their relationship?",
-            "criteria": "",
-            "options": [
-              {
-                "letter": "A",
-                "text": "The main character's wife trusts him and supports his ideas."
-              },
-              {
-                "letter": "B",
-                "text": "The main character is a dreamer, and his wife thinks he is foolish."
-              },
-              {
-                "letter": "C",
-                "text": "The main character is bossy and makes all the decisions for his wife."
-              },
-              {
-                "letter": "D",
-                "text": "The main character's wife doesn't believe he is a good businessman."
-              }
-            ],
-            "correct_letter": "A",
-            "correct_rationale": "Option A is correct. The wife says \"I trust you, and I'm ready to see all that America has to offer\" in paragraph (3), which directly states her trust. Even when she raises a concern about convincing others in paragraph (5), she frames it within a compliment: \"You are an excellent farmer and a wonderful businessman.\" Together, the dialogue shows she supports his vision while gently advising caution — a relationship built on trust.",
-            "distractor_rationales": {
-              "B": "Students may focus on the wife's concern in paragraph (5) about convincing others, and read that as doubt about the narrator's judgment — but her words explicitly affirm his strengths (\"You are an excellent farmer and a wonderful businessman\") before raising a practical challenge, which is support, not dismissal.",
-              "C": "Students may notice that the narrator announces the decision immediately and gives no room for his wife to object — but the wife's tone throughout is trusting, not reluctant, and she never expresses resentment or loss of agency.",
-              "D": "Students may extract the wife's warning about convincing others and interpret it as doubt about the narrator's business ability — but she explicitly says \"You are an excellent farmer and a wonderful businessman,\" which contradicts this inference."
-            }
+            "title": "Question 3",
+            "type": "tdq",
+            "question": "What does this line of dialogue show about Mr. Mykawa's opinion on farming? \"Have I been to Texas? No! But what a phenomenal suggestion! 'Please tell me more about Houston and how to get there,' I said.\"",
+            "criteria": "Student identifies that the dialogue shows Mr. Mykawa is enthusiastic and open-minded about farming opportunities — he is immediately excited by the suggestion and eager to learn more.",
+            "options": [],
+            "correct_letter": "",
+            "correct_rationale": "",
+            "distractor_rationales": {}
           },
           "v3_question": {
             "title": "Question 4",

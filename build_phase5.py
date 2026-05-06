@@ -259,10 +259,37 @@ def build_executive_summary() -> dict:
 # discretion plan_instruction, so reviewers can see Claude added these.
 # ---------------------------------------------------------------------------
 
+_LEADING_LABEL_RE = re.compile(
+    r"^(?:"
+    r"\d+\s*[\.\)\:]?\s*"                       # "1. ", "1) ", "1: "
+    r"|q\s*\d+\s*[\.\)\:]?\s*"                  # "Q1. ", "Q1: "
+    r"|question\s*\d+\s*[\.\)\:]?\s*"           # "Question 1. ", "Question 4: "
+    r"|literal\s*comprehension\s*[\:\-]?\s*"    # "Literal Comprehension "
+    r"|lcq\s*[\:\-]?\s*"
+    r"|tdq\s*[\:\-]?\s*"
+    r"|mc\s*[\:\-]?\s*"
+    r"|multiple\s*choice\s*[\:\-]?\s*"
+    r"|highlight\s*[\:\-]?\s*"
+    r"|short\s*answer\s*[\:\-]?\s*"
+    r"|sa\s*[\:\-]?\s*"
+    r"|claim\s*[\:\-]?\s*"
+    r")+",
+    re.I,
+)
+
+
 def _normalize_for_match(s: str) -> str:
-    """Lowercase, collapse whitespace, strip punctuation — for fuzzy equality."""
+    """Lowercase, collapse whitespace, strip punctuation — for fuzzy equality.
+
+    Also strips leading enumeration markers and inline question-type labels
+    that authors use as design tags in the verbatim cells (e.g.,
+    "1. Literal Comprehension What is..." → "What is..."). Without this,
+    Q1 of TX_BBO_XX_G5_1.0_2_v1 false-flags as a verbatim deviation when
+    the rendered question is in fact a clean match.
+    """
     if not s:
         return ""
+    s = _LEADING_LABEL_RE.sub("", s.strip())
     s = s.strip().lower()
     s = re.sub(r"\s+", " ", s)
     s = re.sub(r"[^\w\s]", "", s)
