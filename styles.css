@@ -246,6 +246,99 @@ main {
   font-style: italic;
 }
 
+/* Plan ↔ V2 mapping table inside the module plan panel */
+.plan-map {
+  margin-top: 14px;
+  padding: 12px;
+  background: #f7f9fb;
+  border: 1px solid #d8e1eb;
+  border-radius: 6px;
+}
+.plan-map-header {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.plan-map-header .hint {
+  color: #6c7a87;
+  font-weight: normal;
+  margin-left: 4px;
+}
+.plan-map-summary {
+  font-size: 12px;
+  color: #344;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.plan-map-summary .map-warn {
+  background: #fff4e0;
+  color: #8a4a00;
+  padding: 1px 8px;
+  border-radius: 3px;
+  border: 1px solid #f4cf95;
+  font-weight: 500;
+}
+.plan-map-summary .map-ok {
+  background: #e6f5ea;
+  color: #1f5b32;
+  padding: 1px 8px;
+  border-radius: 3px;
+  border: 1px solid #a9d6b6;
+  font-weight: 500;
+}
+.plan-map-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.plan-map-table thead th {
+  text-align: left;
+  background: #eaeff4;
+  padding: 6px 8px;
+  border: 1px solid #d8e1eb;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #495766;
+}
+.plan-map-table tbody td {
+  padding: 6px 8px;
+  border: 1px solid #e0e6ec;
+  vertical-align: top;
+  background: #fff;
+}
+.plan-map-table .map-plan-label {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #304050;
+}
+.plan-map-table .map-source {
+  font-size: 11px;
+  color: #5a6776;
+  white-space: nowrap;
+}
+.plan-map-table .map-text {
+  color: #2a3540;
+}
+.plan-map-table .map-rendered {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  white-space: nowrap;
+  color: #2a4060;
+}
+.map-badge {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-right: 3px;
+  white-space: nowrap;
+}
+.map-badge.map-ok { background: #e6f5ea; color: #1f5b32; border: 1px solid #a9d6b6; }
+.map-badge.map-missing { background: #fde7e7; color: #8a1d1d; border: 1px solid #f0a9a9; }
+.map-badge.map-moved { background: #fff4e0; color: #8a4a00; border: 1px solid #f4cf95; }
+.map-badge.map-deviation { background: #fdeed3; color: #6e4a00; border: 1px solid #ecc97f; }
+
 /* Module plan + review summary panels */
 details.module-plan-panel,
 details.review-summary-panel,

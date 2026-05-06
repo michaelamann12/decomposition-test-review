@@ -360,7 +360,12 @@ def compute_comparison_rows(lesson: dict) -> list[dict]:
     used_v4: set = set()
     rows: list[dict] = []
 
-    for inst in instructions:
+    # Track plan-position (index of this instruction in the parsed plan order).
+    # Used to detect movement: if plan_position 3 maps to v4 question index 0,
+    # Claude moved it forward; if plan_position 3 (driving role) maps to a v4
+    # target_task question, Claude promoted a DQ into the TT.
+    same_role_plan_position: dict = {}  # role → next-position counter
+    for plan_position, inst in enumerate(instructions):
         i_v2 = match_instruction(inst, v2, used_v2)
         i_v3 = match_instruction(inst, v3, used_v3)
         i_v4 = match_instruction(inst, v4, used_v4)
@@ -368,15 +373,57 @@ def compute_comparison_rows(lesson: dict) -> list[dict]:
         if i_v3 is not None: used_v3.add(i_v3)
         if i_v4 is not None: used_v4.add(i_v4)
 
+        # Compute the expected position of this instruction within its role
+        # in the rendered output. Plan instruction 4 with role "driving" is the
+        # 4th driving question expected; if it lands at v4 driving slot 4,
+        # no movement; if it lands at v4 driving slot 2 or in a TT slot, movement.
+        role = inst["role"]
+        expected_role_position = same_role_plan_position.get(role, 0)
+        same_role_plan_position[role] = expected_role_position + 1
+
         flags = []
         if i_v4 is None:
             flags.append("missing_in_v4")
-        elif inst["source"] == "verbatim":
-            if _normalize_for_match(v4[i_v4].get("question", "")) != _normalize_for_match(inst["text"]):
-                flags.append("verbatim_deviation_v4")
+        else:
+            # v4 question's role + position-within-role
+            v4q_role = role_of_question(v4[i_v4])
+            v4_role_position = sum(
+                1 for j in range(i_v4) if role_of_question(v4[j]) == v4q_role
+            )
+            if v4q_role != role:
+                # Cross-role movement: e.g., DQ instruction landed in TT slot
+                if role == "driving" and v4q_role == "target_task":
+                    flags.append("promoted_to_tt_v4")
+                elif role == "target_task" and v4q_role == "driving":
+                    flags.append("demoted_to_dq_v4")
+                else:
+                    flags.append("role_change_v4")
+            elif v4_role_position != expected_role_position:
+                flags.append("position_changed_v4")
+
+            if inst["source"] == "verbatim":
+                if _normalize_for_match(v4[i_v4].get("question", "")) != _normalize_for_match(inst["text"]):
+                    flags.append("verbatim_deviation_v4")
+
+        # Compute v4 position info for the dashboard's plan-mapping table
+        if i_v4 is not None:
+            v4q_role = role_of_question(v4[i_v4])
+            v4_role_position = sum(
+                1 for j in range(i_v4) if role_of_question(v4[j]) == v4q_role
+            )
+            v4_position_info = {
+                "absolute_index": i_v4,
+                "role": v4q_role,
+                "role_position": v4_role_position,  # 0-indexed within role
+            }
+        else:
+            v4_position_info = None
 
         rows.append({
             "plan_instruction": inst,
+            "plan_position": plan_position,                     # absolute index in plan order
+            "expected_role_position": expected_role_position,   # 0-indexed within role
+            "v4_position": v4_position_info,
             "v2_question": v2[i_v2] if i_v2 is not None else None,
             "v3_question": v3[i_v3] if i_v3 is not None else None,
             "v4_question": v4[i_v4] if i_v4 is not None else None,

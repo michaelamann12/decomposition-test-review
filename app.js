@@ -160,7 +160,106 @@
     if (mp.planning_notes) {
       mpHtml += `<div class="mp-quote"><strong>Planning Notes:</strong>\n${escapeHTML(mp.planning_notes)}</div>`;
     }
+    // Plan ↔ V2 mapping table — at-a-glance "did Claude follow the plan?"
+    mpHtml += renderPlanMappingTable(L);
     mpBody.innerHTML = mpHtml;
+  }
+
+  // Renders a compact table mapping each parsed plan instruction to its
+  // rendered position in V2. Surfaces three failure modes at a glance:
+  //   - missing (Claude dropped the item)
+  //   - role change (DQ promoted to TT, or vice versa)
+  //   - position change (item rendered out of plan order)
+  function renderPlanMappingTable(L) {
+    const rows = (L.comparison_rows || []).filter(r => {
+      const inst = r.plan_instruction || {};
+      return inst.source && inst.source !== "discretion";
+    });
+    if (!rows.length) return "";
+
+    const roleAbbrev = { driving: "DQ", target_task: "TT", extension: "EXT" };
+    const sourceAbbrev = { verbatim: "verbatim", outline: "outline" };
+
+    // Header summary: count plan items vs V2 rendered
+    let planDQ = 0, planTT = 0, v2DQ = 0, v2TT = 0, missing = 0, moved = 0, promoted = 0;
+    rows.forEach(r => {
+      const inst = r.plan_instruction || {};
+      if (inst.role === "driving") planDQ++;
+      if (inst.role === "target_task") planTT++;
+      const v4 = r.v4_position;
+      if (!v4) { missing++; return; }
+      if (v4.role === "driving") v2DQ++;
+      if (v4.role === "target_task") v2TT++;
+      if ((r.flags || []).includes("promoted_to_tt_v4")) promoted++;
+      if ((r.flags || []).includes("position_changed_v4")) moved++;
+    });
+
+    const headerBits = [];
+    headerBits.push(`<strong>Plan:</strong> ${planDQ} DQ${planDQ===1?"":"s"} + ${planTT} TT`);
+    if (missing) headerBits.push(`<span class="map-warn">${missing} missing in V2</span>`);
+    if (promoted) headerBits.push(`<span class="map-warn">${promoted} DQ promoted to TT</span>`);
+    if (moved) headerBits.push(`<span class="map-warn">${moved} moved out of plan order</span>`);
+    if (!missing && !promoted && !moved) headerBits.push(`<span class="map-ok">V2 followed the plan</span>`);
+
+    let html = `<div class="plan-map">`;
+    html += `<div class="plan-map-header"><strong>Plan ↔ V2 Mapping</strong> <span class="hint">(did Claude follow the plan?)</span></div>`;
+    html += `<div class="plan-map-summary">${headerBits.join(" · ")}</div>`;
+    html += `<table class="plan-map-table"><thead><tr>`;
+    html += `<th>Plan item</th><th>Source</th><th>Plan text (truncated)</th><th>V2 rendered as</th><th>Status</th>`;
+    html += `</tr></thead><tbody>`;
+
+    rows.forEach(r => {
+      const inst = r.plan_instruction || {};
+      const role = inst.role || "driving";
+      const expectedRolePos = (r.expected_role_position || 0) + 1;
+      const planLabel = `${roleAbbrev[role] || "?"}${expectedRolePos}`;
+      const sourceLabel = sourceAbbrev[inst.source] || inst.source || "—";
+      const planText = inst.text || "";
+      const truncated = planText.length > 90 ? planText.slice(0, 90) + "…" : planText;
+      const v4 = r.v4_position;
+      const flags = r.flags || [];
+
+      let renderedCell;
+      if (!v4) {
+        renderedCell = `<span class="map-badge map-missing">— not rendered</span>`;
+      } else {
+        const v4RoleLabel = roleAbbrev[v4.role] || "?";
+        renderedCell = `V2 ${v4RoleLabel}${v4.role_position + 1}`;
+      }
+
+      let statusBadges = "";
+      if (flags.includes("missing_in_v4")) {
+        statusBadges += `<span class="map-badge map-missing">🚩 MISSING</span> `;
+      }
+      if (flags.includes("promoted_to_tt_v4")) {
+        statusBadges += `<span class="map-badge map-moved">⬆ promoted to TT</span> `;
+      }
+      if (flags.includes("demoted_to_dq_v4")) {
+        statusBadges += `<span class="map-badge map-moved">⬇ demoted to DQ</span> `;
+      }
+      if (flags.includes("role_change_v4")) {
+        statusBadges += `<span class="map-badge map-moved">↔ role changed</span> `;
+      }
+      if (flags.includes("position_changed_v4")) {
+        statusBadges += `<span class="map-badge map-moved">🔄 moved (was ${planLabel})</span> `;
+      }
+      if (flags.includes("verbatim_deviation_v4")) {
+        statusBadges += `<span class="map-badge map-deviation">verbatim ≠</span> `;
+      }
+      if (!statusBadges) {
+        statusBadges = `<span class="map-badge map-ok">✓ followed</span>`;
+      }
+
+      html += `<tr>`;
+      html += `<td class="map-plan-label">${escapeHTML(planLabel)}</td>`;
+      html += `<td class="map-source">${escapeHTML(sourceLabel)}</td>`;
+      html += `<td class="map-text">${escapeHTML(truncated)}</td>`;
+      html += `<td class="map-rendered">${renderedCell}</td>`;
+      html += `<td class="map-status">${statusBadges}</td>`;
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div>`;
+    return html;
   }
 
   function renderReviewSummaryPanel() {

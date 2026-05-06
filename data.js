@@ -402,6 +402,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "1. Literal Comprehension What is the narrator hoping to find in Houston?"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
+          },
           "v2_question": {
             "title": "Question 1",
             "type": "lcq",
@@ -440,6 +447,13 @@ window.DATA = {
             "source": "outline",
             "text": "2. Highlight question to identify example of personification"
           },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
+          },
           "v2_question": {
             "title": "Question 2",
             "type": "highlight as answer",
@@ -477,6 +491,13 @@ window.DATA = {
             "role": "driving",
             "source": "outline",
             "text": "3. Multiple choice question asking students to identify what nonhuman things are being personified AND what human qualities are used to describe the nonhuman things"
+          },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
           },
           "v2_question": {
             "title": "Question 3",
@@ -579,6 +600,13 @@ window.DATA = {
             "source": "outline",
             "text": "4. With a separate example of personification from the text: What nonhuman things are being personified?"
           },
+          "plan_position": 3,
+          "expected_role_position": 3,
+          "v4_position": {
+            "absolute_index": 3,
+            "role": "driving",
+            "role_position": 3
+          },
           "v2_question": {
             "title": "Question 4",
             "type": "tdq",
@@ -617,6 +645,9 @@ window.DATA = {
             "source": "outline",
             "text": "5. With a separate example of personification from the text: What human qualities are used to describe the nonhuman things?"
           },
+          "plan_position": 4,
+          "expected_role_position": 4,
+          "v4_position": null,
           "v2_question": {
             "title": "Question 5",
             "type": "tdq",
@@ -648,6 +679,13 @@ window.DATA = {
             "source": "outline",
             "text": "Students will need to answer two questions about a new example of personification: What nonhuman things are being personified? AND What human qualities are used to describe the nonhuman things?",
             "format": "TDQ Target Task ELEM"
+          },
+          "plan_position": 5,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 4,
+            "role": "target_task",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Assessment — Target Task (TDQ Target Task ELEM)",
@@ -1046,6 +1084,13 @@ window.DATA = {
             "source": "outline",
             "text": "5 driving questions to practice context clues"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
+          },
           "v2_question": null,
           "v3_question": null,
           "v4_question": {
@@ -1087,6 +1132,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "What textual evidence suggests that the word cowered means \"bent one's body out of fear\"?\n\nA. … down in the nest without answering.\n\nB. … jump back two clear feet.\n\nC. … stayed balancing to and fro ...\n\nD. … that never change their expression ...\n\nIf you did not know what the word tuft meant, what meaning would be most likely, based on context clues in the passage?\n\nWhen he had lifted one-third of himself clear of the ground, he stayed balancing to and fro exactly as a dandelion tuft balances in the wind, and he looked at Rikki-tikki with the wicked snake's eyes that never change their expression, whatever the snake may be thinking of.\n\nA. a stem\n\nB. a root\n\nC. a bouquet\n\nD. a bunch or cluster of small, soft parts",
             "format": "MP Target Task"
+          },
+          "plan_position": 1,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 5,
+            "role": "target_task",
+            "role_position": 0
           },
           "v2_question": null,
           "v3_question": null,
@@ -1722,6 +1774,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "What is the key idea of the first paragraph?"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
+          },
           "v2_question": {
             "title": "Question 1",
             "type": "tdq",
@@ -1759,6 +1818,13 @@ window.DATA = {
             "role": "driving",
             "source": "verbatim",
             "text": "Why was Shinpei unconcerned with the Olympics?"
+          },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
           },
           "v2_question": {
             "title": "Question 3",
@@ -1798,6 +1864,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "Why did Shinpei only notice the fairground buildings after the gentleman left?"
           },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
+          },
           "v2_question": {
             "title": "Question 4",
             "type": "tdq",
@@ -1836,6 +1909,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "What is the key idea of the seventh and eighth paragraphs?"
           },
+          "plan_position": 3,
+          "expected_role_position": 3,
+          "v4_position": {
+            "absolute_index": 3,
+            "role": "driving",
+            "role_position": 3
+          },
           "v2_question": {
             "title": "Question 5",
             "type": "tdq",
@@ -1873,6 +1953,13 @@ window.DATA = {
             "role": "driving",
             "source": "outline",
             "text": "Ask the key idea of the fifth paragraph as a MC"
+          },
+          "plan_position": 4,
+          "expected_role_position": 4,
+          "v4_position": {
+            "absolute_index": 4,
+            "role": "driving",
+            "role_position": 4
           },
           "v2_question": {
             "title": "Question 2",
@@ -1975,6 +2062,13 @@ window.DATA = {
             "source": "outline",
             "text": "What is the key idea of the last three paragraphs? Explain your answer",
             "format": "TDQ Target Task ELEM"
+          },
+          "plan_position": 5,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 5,
+            "role": "target_task",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Claim Question",
@@ -2522,6 +2616,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "Question 4. Based on the dialogue between the main character and his wife, what can the reader infer about their relationship?"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 3,
+            "role": "driving",
+            "role_position": 3
+          },
           "v2_question": {
             "title": "Question 4",
             "type": "mpchoice",
@@ -2594,13 +2695,22 @@ window.DATA = {
               "D": "Students may misread the wife's practical concern (\"how will we accomplish this on our own?\") as doubt about his business ability. However, she explicitly says he is \"an excellent farmer and a wonderful businessman\" — her concern is about the challenge, not his competence."
             }
           },
-          "flags": []
+          "flags": [
+            "position_changed_v4"
+          ]
         },
         {
           "plan_instruction": {
             "role": "driving",
             "source": "verbatim",
             "text": "a. The main character's wife trusts him and supports his ideas."
+          },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Question 1",
@@ -2633,6 +2743,7 @@ window.DATA = {
             "distractor_rationales": {}
           },
           "flags": [
+            "position_changed_v4",
             "verbatim_deviation_v4"
           ]
         },
@@ -2641,6 +2752,13 @@ window.DATA = {
             "role": "driving",
             "source": "verbatim",
             "text": "b. The main character is a dreamer, and his wife thinks he is foolish."
+          },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
           },
           "v2_question": {
             "title": "Question 2",
@@ -2673,6 +2791,7 @@ window.DATA = {
             "distractor_rationales": {}
           },
           "flags": [
+            "position_changed_v4",
             "verbatim_deviation_v4"
           ]
         },
@@ -2681,6 +2800,13 @@ window.DATA = {
             "role": "driving",
             "source": "verbatim",
             "text": "c. The main character is bossy and makes all the decisions for his wife."
+          },
+          "plan_position": 3,
+          "expected_role_position": 3,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
           },
           "v2_question": {
             "title": "Question 3",
@@ -2734,6 +2860,7 @@ window.DATA = {
             "distractor_rationales": {}
           },
           "flags": [
+            "position_changed_v4",
             "verbatim_deviation_v4"
           ]
         },
@@ -2742,6 +2869,13 @@ window.DATA = {
             "role": "driving",
             "source": "verbatim",
             "text": "d. The main character's wife doesn't believe he is a good businessman."
+          },
+          "plan_position": 4,
+          "expected_role_position": 4,
+          "v4_position": {
+            "absolute_index": 4,
+            "role": "driving",
+            "role_position": 4
           },
           "v2_question": {
             "title": "Question 5",
@@ -2774,6 +2908,9 @@ window.DATA = {
             "source": "outline",
             "text": "Questions 1-3 from Activity Sheet 3.3"
           },
+          "plan_position": 5,
+          "expected_role_position": 5,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2787,6 +2924,9 @@ window.DATA = {
             "source": "outline",
             "text": "1. What details does Mr. Mykawa show through the following line of dialogue? \"I hear Texas is a wonderful place for growing crops. Would you concur?\""
           },
+          "plan_position": 6,
+          "expected_role_position": 6,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2800,6 +2940,9 @@ window.DATA = {
             "source": "outline",
             "text": "2. What does the following line of dialogue show that the businessmen concluded about Mr. Mykawa?"
           },
+          "plan_position": 7,
+          "expected_role_position": 7,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2813,6 +2956,9 @@ window.DATA = {
             "source": "outline",
             "text": "Finally, one man responded, \"Actually, Texas is a fine place for farming, specifically Houston, Texas. Have you been?\""
           },
+          "plan_position": 8,
+          "expected_role_position": 8,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2826,6 +2972,9 @@ window.DATA = {
             "source": "outline",
             "text": "3. What does this line of dialogue show about Mr. Mykawa's opinion on farming?"
           },
+          "plan_position": 9,
+          "expected_role_position": 9,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2839,6 +2988,9 @@ window.DATA = {
             "source": "outline",
             "text": "Have I been to Texas? No! But what a phenomenal suggestion! \"Please tell me more about Houston and how to get there,\" I said."
           },
+          "plan_position": 10,
+          "expected_role_position": 10,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2852,6 +3004,9 @@ window.DATA = {
             "source": "outline",
             "text": "Question 5--> Rewrite question 2B from Activity Sheet 3.4. The question should provide the information needed to students to highlight evidence that supports the correct answer to question 2A from activity sheet 3.4"
           },
+          "plan_position": 11,
+          "expected_role_position": 11,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -2865,6 +3020,13 @@ window.DATA = {
             "source": "outline",
             "text": "This Target Task will have two questions based on these materials from the curriculum: Find a line of dialogue that helps show the relationship between Mr. Mykawa and his colleagues. Copy the quote and then explain how it describes the relationship. Now, the first question will be a MC asking students to select which line of dialogue shows the relationship between Mr. Mykawa and his colleagues. The second question will provide the correct dialogue from question 1 and ask students to explain how it describes the relationship between Mr. Mykawa and his colleagues.",
             "format": "TDQ Target Task ELEM"
+          },
+          "plan_position": 12,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 5,
+            "role": "target_task",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Assessment — Target Task (TDQ Target Task ELEM)",
@@ -3334,6 +3496,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "Why do you think many of Shinpei Mykawa's neighbors had doubts about the success of his rice farm?"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
+          },
           "v2_question": {
             "title": "Question 3",
             "type": "tdq",
@@ -3364,13 +3533,22 @@ window.DATA = {
             "correct_rationale": "",
             "distractor_rationales": {}
           },
-          "flags": []
+          "flags": [
+            "position_changed_v4"
+          ]
         },
         {
           "plan_instruction": {
             "role": "driving",
             "source": "outline",
             "text": "1 MC question about theme"
+          },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Question 1",
@@ -3444,13 +3622,22 @@ window.DATA = {
               "D": "Students may pick this because the deed signing is a concrete, memorable moment. However, this is a specific fact from the chapter, not a universal idea that can apply beyond this one story."
             }
           },
-          "flags": []
+          "flags": [
+            "position_changed_v4"
+          ]
         },
         {
           "plan_instruction": {
             "role": "driving",
             "source": "outline",
             "text": "2 additional driving questions that build toward the skill in the target task"
+          },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
           },
           "v2_question": {
             "title": "Question 2",
@@ -3491,6 +3678,9 @@ window.DATA = {
             "text": "Find a quote from the text that shows the theme of the opportunity for success in America. Copy the quote and explain how it relates to the theme.\n\nThis should focus on a unique section of text that was NOT covered in the driving questions so give students a paragraph range that is separate from the quotes covered in the driving questions.",
             "format": "Quickwrite ELEM"
           },
+          "plan_position": 3,
+          "expected_role_position": 0,
+          "v4_position": null,
           "v2_question": null,
           "v3_question": null,
           "v4_question": null,
@@ -3865,6 +4055,13 @@ window.DATA = {
             "source": "outline",
             "text": "1 literal comprehension question to begin the driving question sequence"
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
+          },
           "v2_question": {
             "title": "Question 1",
             "type": "lcq",
@@ -3902,6 +4099,13 @@ window.DATA = {
             "role": "driving",
             "source": "outline",
             "text": "1 short answer TDQ that drives toward an understanding of the author's purpose for writing chapter 5."
+          },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
           },
           "v2_question": {
             "title": "Question 2",
@@ -3941,6 +4145,13 @@ window.DATA = {
             "source": "outline",
             "text": "1 highlight question looking for evidence that shows the author's purpose for writing chapter 5"
           },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
+          },
           "v2_question": {
             "title": "Question 3",
             "type": "highlight as answer",
@@ -3979,6 +4190,13 @@ window.DATA = {
             "source": "verbatim",
             "text": "What is the author's purpose in writing Shinpei Mykawa chapter 5, \"My Success in America\"?\n\nSupport your answer with evidence from the text.",
             "format": "Shortwrite Explanatory ELEM"
+          },
+          "plan_position": 3,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 3,
+            "role": "target_task",
+            "role_position": 0
           },
           "v2_question": {
             "title": "Claim Question",
@@ -4433,6 +4651,13 @@ window.DATA = {
             "source": "outline",
             "text": "1 MC asking students to determine if a sentence contains a metaphor or a simile Question 4 from Activity Page 8.3 Annabelle's room looked like it was hit by a hurricane."
           },
+          "plan_position": 0,
+          "expected_role_position": 0,
+          "v4_position": {
+            "absolute_index": 0,
+            "role": "driving",
+            "role_position": 0
+          },
           "v2_question": {
             "title": "Question 1",
             "type": "mpchoice",
@@ -4513,6 +4738,13 @@ window.DATA = {
             "source": "outline",
             "text": "1 short answer asking students to determine if this sentence contains a metaphor or simile Question 5 from Activity Page 8.3 The snow was a blanket covering the yard."
           },
+          "plan_position": 1,
+          "expected_role_position": 1,
+          "v4_position": {
+            "absolute_index": 1,
+            "role": "driving",
+            "role_position": 1
+          },
           "v2_question": {
             "title": "Question 2",
             "type": "tdq",
@@ -4551,6 +4783,13 @@ window.DATA = {
             "source": "outline",
             "text": "1 short answer question asking students to determine if a sentence contains a metaphor or a simile using this example from paragraph 2 \"That train rolled on all day long, to the song of the metal against the tracks, the blur of the towns and villages moving past my eyes.\""
           },
+          "plan_position": 2,
+          "expected_role_position": 2,
+          "v4_position": {
+            "absolute_index": 2,
+            "role": "driving",
+            "role_position": 2
+          },
           "v2_question": {
             "title": "Question 3",
             "type": "tdq",
@@ -4588,6 +4827,13 @@ window.DATA = {
             "role": "driving",
             "source": "outline",
             "text": "1 short answer asking students to explain why the example meets the qualifications for a metaphor (1. compares to things 2. does not use like or as)"
+          },
+          "plan_position": 3,
+          "expected_role_position": 3,
+          "v4_position": {
+            "absolute_index": 3,
+            "role": "driving",
+            "role_position": 3
           },
           "v2_question": {
             "title": "Question 4",
@@ -4628,6 +4874,9 @@ window.DATA = {
             "text": "1 short answer asking students to explain why the example in paragraph 10 meets the qualifications for a simile or a metaphor 1) compares two things 2) uses like or as)",
             "format": "TDQ Target Task ELEM"
           },
+          "plan_position": 4,
+          "expected_role_position": 0,
+          "v4_position": null,
           "v2_question": {
             "title": "Assessment — Target Task (TDQ Target Task ELEM)",
             "type": "tdq",
