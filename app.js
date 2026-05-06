@@ -704,6 +704,26 @@
       reference: "See BUGS.md → BUG-016 for full investigation log, real-data scan results, " +
                  "Codex reviews, and 3-layer design.",
     },
+    "TX_BBO_XX_G5_1.0_3_v1": {
+      tag: "BUG-015",
+      severity: "High",
+      title: "Outline-embedded dialogue quotes rendered as ground-truth source text (fabrication)",
+      body:
+        "The author's Driving Questions (Outline) cell contained dialogue quotes as design intent — e.g., " +
+        "\"I hear Texas is a wonderful place for growing crops. Would you concur?\" V2 rendered those quotes verbatim " +
+        "into three driving questions as if they were lines students would find in the chapter. None of those lines " +
+        "appear in the chapter the students are reading; they were either pulled from an earlier text version or " +
+        "fabricated. The reviewed/edited version (V3) still contains them — the fabrication shipped through review.",
+      fix_status: "Fix design identified — parked for implementation",
+      fix_summary:
+        "Provenance gate over every rendered quoted passage with five labels (IN_READER, IN_ALLOWED_SUPPLEMENT, " +
+        "IN_TEACHER_ONLY, NOT_FOUND, AMBIGUOUS). Default policy: student-facing questions may cite only IN_READER " +
+        "or explicitly-bundled supplements; IN_TEACHER_ONLY and NOT_FOUND halt with author flag. Resolves an " +
+        "underlying contradictory rule in draft-activity SKILL.md (lines 1226 vs 2185) before adding the gate. " +
+        "Sibling architectural gap to BUG-016 (outline-DQ consolidation path).",
+      reference: "See BUGS.md → BUG-015 for full Codex review and proposed fix shape. " +
+                 "Workaround in production: Avery (Bluebonnet G5 lead) has shifted to writing more verbatim, lighter outlines.",
+    },
   };
 
   function renderKnownIssueBanner() {
